@@ -5103,7 +5103,7 @@
       ]
     },
     "Microsoft.AspNetCore/2.0.0": {
-      "sha512": "Pp4CNfgJgKTyU+oRQYh6InA1lwcZLi5ZsfTxWwixagbRsVdWrROBFnKGw+FvbbuzKNyMn4Cg5zRv99LjqxVIJA==",
+      "sha512": "DQ97NXdVlO3cDHlCt4yxIAR/UwiBrKHVaMd1lL4PwMAXRr5an4ZxJjokla95kPqQCAZbIEo3LYlogrs+MKMzjg==",
       "type": "package",
       "path": "microsoft.aspnetcore/2.0.0",
       "files": [
@@ -6002,7 +6002,7 @@
       ]
     },
     "Microsoft.AspNetCore.StaticFiles/2.0.0": {
-      "sha512": "HBMJQ1WPdHO0thltwi7agvfis3c1Kd5HFQDgyy0nV3X4mJvhVGUnymT0+QQU+GGNK9FG/uEQNE3YDSrrBamP7w==",
+      "sha512": "vJxrx9qoaJVsDzBTOPBC+Tngm2B+0ZyH/NQWWBaAow/+sQuONjVpGZ+4//x+NpEX4o8WS1No6Aim2KzcW8DZmw==",
       "type": "package",
       "path": "microsoft.aspnetcore.staticfiles/2.0.0",
       "files": [
@@ -13115,7 +13115,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\admin\\.nuget\\packages\\": {},
+    "C:\\Users\\Duane Rush\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13124,17 +13124,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\admin\\codefellows\\401\\StickerFire\\StickerFire\\StickerFire\\StickerFire.csproj",
+      "projectUniqueName": "C:\\Users\\Duane Rush\\Source\\Repos\\StickerFire\\StickerFire\\StickerFire\\StickerFire.csproj",
       "projectName": "StickerFire",
-      "projectPath": "C:\\Users\\admin\\codefellows\\401\\StickerFire\\StickerFire\\StickerFire\\StickerFire.csproj",
-      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\admin\\codefellows\\401\\StickerFire\\StickerFire\\StickerFire\\obj\\",
+      "projectPath": "C:\\Users\\Duane Rush\\Source\\Repos\\StickerFire\\StickerFire\\StickerFire\\StickerFire.csproj",
+      "packagesPath": "C:\\Users\\Duane Rush\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Duane Rush\\Source\\Repos\\StickerFire\\StickerFire\\StickerFire\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Duane Rush\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
