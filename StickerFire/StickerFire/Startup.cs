@@ -41,11 +41,12 @@ namespace StickerFire
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseAuthentication();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+            app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
 
             app.Run(async (context) =>
