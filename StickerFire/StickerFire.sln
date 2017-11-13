@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StickerFire", "StickerFire\StickerFire.csproj", "{17DDAD4E-6D69-4914-A923-70E5C3858241}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StickerFire", "StickerFire\StickerFire.csproj", "{17DDAD4E-6D69-4914-A923-70E5C3858241}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DE403554-5C33-4713-B00A-BA3B6B32B8B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StickerFireUnitTests", "StickerFireUnitTests\StickerFireUnitTests.csproj", "{F6EA5A20-20E4-4BB1-A83D-A2F945628A27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{17DDAD4E-6D69-4914-A923-70E5C3858241}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17DDAD4E-6D69-4914-A923-70E5C3858241}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17DDAD4E-6D69-4914-A923-70E5C3858241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6EA5A20-20E4-4BB1-A83D-A2F945628A27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6EA5A20-20E4-4BB1-A83D-A2F945628A27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6EA5A20-20E4-4BB1-A83D-A2F945628A27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6EA5A20-20E4-4BB1-A83D-A2F945628A27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F6EA5A20-20E4-4BB1-A83D-A2F945628A27} = {DE403554-5C33-4713-B00A-BA3B6B32B8B8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {180B551B-0AD5-497E-85AA-A41B2AD127C0}
