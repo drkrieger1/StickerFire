@@ -13124,11 +13124,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Duane Rush\\Source\\Repos\\StickerFire\\StickerFire\\StickerFire\\StickerFire.csproj",
+      "projectUniqueName": "C:\\Users\\Duane Rush\\source\\repos\\StickerFire\\StickerFire\\StickerFire\\StickerFire.csproj",
       "projectName": "StickerFire",
-      "projectPath": "C:\\Users\\Duane Rush\\Source\\Repos\\StickerFire\\StickerFire\\StickerFire\\StickerFire.csproj",
+      "projectPath": "C:\\Users\\Duane Rush\\source\\repos\\StickerFire\\StickerFire\\StickerFire\\StickerFire.csproj",
       "packagesPath": "C:\\Users\\Duane Rush\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Duane Rush\\Source\\Repos\\StickerFire\\StickerFire\\StickerFire\\obj\\",
+      "outputPath": "C:\\Users\\Duane Rush\\source\\repos\\StickerFire\\StickerFire\\StickerFire\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
