@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StickerFire.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ namespace StickerFire.Controllers
 {
     public class UserAuthController : Controller
     {
+
         //Dependancy injection for userManager and signInManager
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -27,6 +30,7 @@ namespace StickerFire.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
+
 
     }
 }
