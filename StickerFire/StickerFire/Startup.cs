@@ -47,7 +47,7 @@ namespace StickerFire
             services.AddIdentity<ApplicationUser, IdentityRole>()
                    .AddEntityFrameworkStores<UserDbContext>()
                    .AddDefaultTokenProviders();
-            //This context is for campaign database model 
+            //This context is for campaign database model
             services.AddDbContext<StickerFireDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("StickerFireContext")));
         }
