@@ -47,7 +47,9 @@ namespace StickerFire
             services.AddIdentity<ApplicationUser, IdentityRole>()
                    .AddEntityFrameworkStores<UserDbContext>()
                    .AddDefaultTokenProviders();
-
+            //This context is for campaign database model 
+            services.AddDbContext<StickerFireDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("StickerFireContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
