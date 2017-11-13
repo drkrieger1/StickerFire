@@ -8,17 +8,20 @@ namespace StickerFire.Models
     public class Campaign
     {
         int ID { get; set; }
-
         int OwnerID { get; set; }
-        string ImgPath { get; set; }
-        string Descrition { get; set; }
-        bool Published { get; set; }
-        //enum category {get; set; }
         int Votes { get; set; }
         int Views { get; set; }
-        //Votes Voters 
+
+        string ImgPath { get; set; }
+        string Descrition { get; set; }
         string DenyMessage { get; set; }
+
+        bool Published { get; set; }
         bool Active { get; set; }
+
+        Category Category { get; set; }
+        Status Status { get; set; }
+        //Votes Voters 
         DateTime Expiration { get; set; }
 
     }
