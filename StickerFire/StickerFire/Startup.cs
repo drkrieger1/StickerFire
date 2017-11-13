@@ -9,6 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using StickerFire.Data;
+using Microsoft.EntityFrameworkCore;
+using StickerFire.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace StickerFire
 {
@@ -35,7 +39,15 @@ namespace StickerFire
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie("CookieLogin", options =>
                 options.AccessDeniedPath = new PathString("/Account/Forbidden/"));
-            
+
+            // This context is derived from IdentityDbContext. This context is responsible for the ASPNET Identity tables in the database. 
+            services.AddDbContext<UserDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("StickerFireContext")));
+            //Enable Identity Functionality using ApplicationUser model
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                   .AddEntityFrameworkStores<UserDbContext>()
+                   .AddDefaultTokenProviders();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
