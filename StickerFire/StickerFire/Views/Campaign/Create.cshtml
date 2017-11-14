@@ -1,4 +1,6 @@
-﻿@*@model StickerFire.Models.*@
+﻿@model StickerFire.Models.Campaign
+@using StickerFire.Data;
+@using StickerFire.Models;
 
 @{
     Layout = "_Layout";
@@ -17,17 +19,15 @@
                     <input asp-for="Name" class="form-control" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
+                @foreach(var item in @Html.GetEnumSelectList(typeof(StickerFire.Models.Category)))
+                {
+                    <p>@item.Text</p>
 
+                }
                 <div>
-                    @*select list for category*@
                     <label asp-for="Category" class="control-label">Select Category</label>
-                    <div>
-                        <select asp-for="CampaignCategory" asp-items="Model.category">
-                            <option value="">Select All</option>
-                        </select>
-
-                        <input type="submit" value="Select" />
-                    </div>
+                    <select asp-for="Category" class="form-control" asp-items="Html.GetEnumSelectList<Category>()"></select>
+                    <span asp-validation-for="Category" class="text-danger"></span>
                 </div>
 
                 @*Description of the campain*@
