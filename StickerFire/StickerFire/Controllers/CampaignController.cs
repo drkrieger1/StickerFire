@@ -27,29 +27,26 @@ namespace StickerFire.Controllers
         }
 
         //Index Gathering all campaigns from the Context
-        public async Task<IActionResult> Index(Category category, string searchString)
+        public async Task<IActionResult> Index(Category? category, string searchString)
         {
             //IQueryable<Category> categoryQuery = from cat in _Context.Campaign
             //                              orderby cat.Category
             //                              select cat.Category;
-            var campaigns = from c in _Context.Campaign
-                            select c;
             if (!String.IsNullOrEmpty(searchString))
             {
-                campaigns = campaigns.Where(c => c.Title.Contains(searchString));
-                return View(campaigns);
+                
+                return View(await _Context.Campaign.Where(c => c.Title.Contains(searchString)).ToListAsync());
             }
-            Category Empty = default(Category);
-            if (category != Empty)
+            
+            if (category.HasValue)
             {
-                campaigns = campaigns.Where(c => c.Category == category);
-                return View(campaigns);
+                return View(await _Context.Campaign.Where(c => c.Category == category).ToListAsync());
             }
-            List<Campaign> campaignAll = new List<Campaign>();
-            campaignAll = await campaigns.ToListAsync();
+            //List<Campaign> campaignAll = new List<Campaign>();
+            //campaignAll = await campaigns.ToListAsync();
 
-            //return View(await _Context.Campaign.ToListAsync());
-            return View(campaigns);
+            return View(await _Context.Campaign.ToListAsync());
+            
         }
         //Get the create View
         public IActionResult Create()
