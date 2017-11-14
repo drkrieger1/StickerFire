@@ -53,7 +53,8 @@ namespace StickerFire.Controllers
                 return NotFound();
             }
 
-            var campaign = await _Context.Campaign.SingleOrDefaultAsync(c => c.ID == id);
+            var campaign = await _Context.Campaign
+                .SingleOrDefaultAsync(c => c.ID == id);
 
             if(campaign == null)
             {
@@ -62,29 +63,36 @@ namespace StickerFire.Controllers
             return View(campaign);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id,[Bind("ID,OwnerID,Votes,Views,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign)
-        //{
-        //    if(id != campaign.ID)
-        //    {
-        //        return NotFound();
-        //    }
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _Context.Update(campaign);
-        //            await _Context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!CampaignExists(campaign.ID))
-        //            {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ID,OwnerID,Votes,Views,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign)
+        {
+            if (id != campaign.ID)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _Context.Update(campaign);
+                await _Context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+                return View(campaign);
+        }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
 
-        //            }
-        //        }
-        //    }
-        //}
+            var campaign = await _Context.Campaign
+                .SingleOrDefaultAsync(m => m.ID == id);
+            if(campaign == null)
+            {
+                return NotFound(); 
+            }
+            return View(campaign);
+        }
     }
 }
