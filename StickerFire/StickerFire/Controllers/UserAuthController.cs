@@ -62,13 +62,13 @@ namespace StickerFire.Controllers
 
         //Register Admin user
         [HttpPost]
-        public async Task<IActionResult> RegisterAdmin(RegisterViewModel avm, string returnUrl = null)
+        public async Task<IActionResult> RegisterAdmin(MegaViewModel avm, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = avm.Email, Email = avm.Email };
-                var result = await _userManager.CreateAsync(user, avm.Password);
+                var user = new ApplicationUser { UserName = avm.RegisterViewModel.Email, Email = avm.RegisterViewModel.Email };
+                var result = await _userManager.CreateAsync(user, avm.RegisterViewModel.Password);
 
                 if (result.Succeeded)
                 {
@@ -78,7 +78,6 @@ namespace StickerFire.Controllers
                     memberClaims.Add(admin);
 
                     var addClaims = await _userManager.AddClaimsAsync(user, memberClaims);
-
 
                     if (addClaims.Succeeded)
                     {
@@ -91,26 +90,21 @@ namespace StickerFire.Controllers
             return View();
         }
 
-        //Login for all users
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
+        //Login User
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel lvm)
+        public async Task<IActionResult> Login(MegaViewModel lvm)
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, lvm.RememberMe, lockoutOnFailure: false);
+                //bind viewmodel data to user and sign in.
+                var result = await _signInManager.PasswordSignInAsync(lvm.LoginViewModel.Email, lvm.LoginViewModel.Password, lvm.LoginViewModel.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     var userIdentity = new ClaimsIdentity("Registration");
 
                     var userPrinciple = new ClaimsPrincipal(userIdentity);
                     await HttpContext.SignInAsync(
-                        "MyCookieLogin", userPrinciple,
+                        "CookieLogin", userPrinciple,
                             new AuthenticationProperties
                             {
                                 ExpiresUtc = DateTime.UtcNow.AddMinutes(45),
