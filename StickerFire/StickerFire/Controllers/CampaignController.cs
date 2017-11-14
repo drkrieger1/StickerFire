@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StickerFire.Data;
 using StickerFire.Models;
@@ -23,22 +23,25 @@ namespace StickerFire.Controllers
         //Index Gathering all campaigns from the Context
         public async Task<IActionResult> Index(Category category, string searchString)
         {
-            IQueryable<Category> categoryQuery = from cat in _Context.Campaign
-                                          orderby cat.Category
-                                          select cat.Category;
+            //IQueryable<Category> categoryQuery = from cat in _Context.Campaign
+            //                              orderby cat.Category
+            //                              select cat.Category;
             var campaigns = from c in _Context.Campaign
                             select c;
             if (!String.IsNullOrEmpty(searchString))
             {
                 campaigns = campaigns.Where(c => c.Title.Contains(searchString));
             }
-            //Category Empty = default(Category);
-            //if (category != Empty)
-            //{
-            //    campaigns = campaigns.Where(c => c.Category.Contains(category));
-            //}
+            Category Empty = default(Category);
+            if (category != Empty)
+            {
+                campaigns = campaigns.Where(c => c.Category == category);
+            }
+            var CampaignVm = new CategoryViewModel();
+            CampaignVm.campaings = await campaigns.ToListAsync();
 
-            return View(await _Context.Campaign.ToListAsync());
+            //return View(await _Context.Campaign.ToListAsync());
+            return View(CampaignVm);
         }
         //Get the create View
         public IActionResult Create()
