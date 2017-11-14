@@ -37,11 +37,11 @@ namespace StickerFire.Controllers
             {
                 campaigns = campaigns.Where(c => c.Category == category);
             }
-            var CampaignVm = new CategoryViewModel();
-            CampaignVm.campaings = await campaigns.ToListAsync();
+            List<Campaign> campaignAll = new List<Campaign>();
+            campaignAll = await campaigns.ToListAsync();
 
             //return View(await _Context.Campaign.ToListAsync());
-            return View(CampaignVm);
+            return View(campaignAll);
         }
         //Get the create View
         public IActionResult Create()
