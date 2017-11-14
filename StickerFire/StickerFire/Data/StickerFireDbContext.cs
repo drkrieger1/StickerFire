@@ -12,5 +12,6 @@ namespace StickerFire.Data
         {
 
         }
+        public DbSet<StickerFire.Models.Campaign> Campaign { get; set; }
     }
 }
