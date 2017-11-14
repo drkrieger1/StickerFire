@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace StickerFire.Models
 {
     public class Campaign
-    {
+    {   
+        [Key]
         int ID { get; set; }
         int OwnerID { get; set; }
         int Votes { get; set; }
