@@ -35,20 +35,21 @@ namespace StickerFire.Controllers
 
         //Register regular user
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel rvm, string returnUrl = null)
-        {
+        public async Task<IActionResult> Register(MegaViewModel rvm, string returnUrl = null)
+            {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = rvm.Email, Email = rvm.Email };
-                var result = await _userManager.CreateAsync(user, rvm.Password);
+                var user = new ApplicationUser { UserName = rvm.RegisterViewModel.Email, Email = rvm.RegisterViewModel.Email };
+                var result = await _userManager.CreateAsync(user, rvm.RegisterViewModel.Password);
 
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
                 }
             }
-            return View();
+            return RedirectToAction("Index", "UserAuth");
         }
 
 
