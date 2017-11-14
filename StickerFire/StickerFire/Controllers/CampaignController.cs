@@ -61,5 +61,30 @@ namespace StickerFire.Controllers
             }
             return View(campaign);
         }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id,[Bind("ID,OwnerID,Votes,Views,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign)
+        //{
+        //    if(id != campaign.ID)
+        //    {
+        //        return NotFound();
+        //    }
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _Context.Update(campaign);
+        //            await _Context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!CampaignExists(campaign.ID))
+        //            {
+
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
