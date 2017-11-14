@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using Microsoft.EntityFrameworkCore;
 using StickerFire.Data;
 using StickerFire.Models;
@@ -7,11 +6,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace StickerFire.Controllers
 {
     public class CampaignController : Controller
     {
+        CloudStorageAccount storageAccount = new CloudStorageAccount(
+     new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
+     "stickerfireblob",
+     "35haxRA/RP4oE5X1QOt4A1neoNAqBFqgXWm0d41uBhPOL2QTS704DgusJsqBiJdC93xPcP90YeeHgKT09SwoRg=="), true);
 
         private readonly StickerFireDbContext _Context;
         //Cunstructor to requier a DbContext 
