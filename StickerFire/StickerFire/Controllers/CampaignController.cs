@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using Microsoft.EntityFrameworkCore;
 using StickerFire.Data;
 using StickerFire.Models;
@@ -7,11 +6,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
+using Microsoft.AspNetCore.Identity;
 
 namespace StickerFire.Controllers
 {
     public class CampaignController : Controller
     {
+
 
         private readonly StickerFireDbContext _Context;
         //Cunstructor to requier a DbContext 
