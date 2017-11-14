@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace StickerFire.Models
 {
     public class Campaign
+
     {
         public int ID { get; set; }
         public int OwnerID { get; set; }
@@ -19,6 +21,7 @@ namespace StickerFire.Models
 
         public bool Published { get; set; }
         public bool Active { get; set; }
+
 
         public Category Category { get; set; }
         public Status Status { get; set; }
