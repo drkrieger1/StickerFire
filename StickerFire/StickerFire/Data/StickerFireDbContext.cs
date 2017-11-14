@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StickerFire.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace StickerFire.Data
         {
 
         }
-        public DbSet<StickerFire.Models.Campaign> Campaign { get; set; }
+
+        public DbSet<Campaign> Campaign { get; set; }
+
     }
 }

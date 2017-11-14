@@ -1,4 +1,4 @@
-﻿@model StickerFire.Models.RegisterViewModel
+﻿@model StickerFire.Models.MegaViewModel
 @{
     Layout = "_Layout";
 }
@@ -9,13 +9,13 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-2 login">
-            <form method="post">
+            <form asp-action= "Login" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
                 <h2>Login</h2>
-                <label asp-for="Email">Email</label>
-                <input asp-for="Email" />
+                <label asp-for=LoginViewModel.Email>Email</label>
+                <input asp-for=LoginViewModel.Email />
                 <br />
-                <label asp-for="Password">Password</label>
-                <input asp-for="Password" />
+                <label asp-for=LoginViewModel.Password>Password</label>
+                <input asp-for=LoginViewModel.Password />
                 <br />
 
                 <button type="submit">Login</button>
@@ -25,21 +25,21 @@
 
     <div class="row">
         <div class="col-lg-2">
-            <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <form asp-action="Register" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
                 <h2>Register</h2>
-                <label asp-for="Email">Email</label>
-                <input asp-for="Email" />
-                <span asp-validation-for="Email"></span>
+                <label asp-for="RegisterViewModel.Email">Email</label>
+                <input asp-for="RegisterViewModel.Email" />
+                <span asp-validation-for="RegisterViewModel.Email"></span>
                 <br />
 
-                <label asp-for="Password">Password</label>
-                <input asp-for="Password" />
-                <span asp-validation-for="Password"></span>
+                <label asp-for="RegisterViewModel.Password">Password</label>
+                <input asp-for="RegisterViewModel.Password" />
+                <span asp-validation-for="RegisterViewModel.Password"></span>
                 <br />
 
-                <label asp-for="ConfirmPassword">Confirm Password</label>
-                <input asp-for="ConfirmPassword" />
-                <span asp-validation-for="ConfirmPassword"></span>
+                <label asp-for="RegisterViewModel.ConfirmPassword">Confirm Password</label>
+                <input asp-for="RegisterViewModel.ConfirmPassword" />
+                <span asp-validation-for="RegisterViewModel.ConfirmPassword"></span>
                 <br />
 
                 <button type="submit">Register</button>
