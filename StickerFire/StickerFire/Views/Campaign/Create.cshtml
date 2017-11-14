@@ -33,11 +33,12 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 
-            </form>
             @*form for upload file*@
-            <form method="post" runat="server" enctype="multipart/form-data">
-                <input type="file" runat="server" />
-
+                <div method="post" runat="server" enctype="multipart/form-data">
+                    <label class="control-label">Upload Image</label>
+                    <input type="file" runat="server" />
+                </div>
+            
             </form>
         </div>
     </div>

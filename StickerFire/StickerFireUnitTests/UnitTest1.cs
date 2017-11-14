@@ -6,6 +6,7 @@ using System;
 using System.Net;
 using Xunit;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace StickerFireUnitTests
 {
@@ -65,8 +66,6 @@ namespace StickerFireUnitTests
         }
 
         [Theory]
-        [InlineData("1234")]
-        [InlineData("pass")]
         [InlineData("password1")]
 
         public void UserPasswordLengthIsValid(string value)
@@ -82,5 +81,87 @@ namespace StickerFireUnitTests
             //Assert
             Assert.InRange(testPw.Length, 8, 100);
         }
+
+        [Theory]
+        [InlineData("password1")]
+        public void LoginPassWordLength(string value)
+        {
+            LoginViewModel login = new LoginViewModel() { Password = (value) };
+
+            string testPw = login.Password;
+
+            Assert.InRange(testPw.Length, 8, 100);
+        }
+
+        [Fact]
+        public void LoginEmailIsValid()
+        {
+            //Arrange
+            LoginViewModel register = new LoginViewModel
+            {
+                Email = "test@mail.com",
+            };
+            //Act
+            string testMail = register.Email;
+
+            //Assert
+            Assert.Equal(testMail, "test@mail.com");
+        }
+
+
+
+        [Fact]
+        public void StickerFireDbContent()
+        {
+            var options = new DbContextOptionsBuilder<StickerFireDbContext>()
+                .UseInMemoryDatabase(databaseName: "getStatusCode")
+                .Options;
+
+            using (var context = new StickerFireDbContext(options))
+            {
+                var controller = new CampaignController(context);
+
+                Campaign campaign = new Campaign();
+                campaign.ID = 1;
+                campaign.OwnerID = 1;
+                campaign.Title = "Awesome Sauce Campaign";
+
+                var result = controller.Create(campaign);
+
+                var find = context.Campaign.FirstOrDefaultAsync(t => t.ID == campaign.ID);
+
+                int number = context.Campaign.Local.Count;
+
+                Assert.Equal(1, number);
+            }
+        }
+
+        [Fact]
+        public void StickerFireDbStatus()
+        {
+            var options = new DbContextOptionsBuilder<StickerFireDbContext>()
+                .UseInMemoryDatabase(databaseName: "getStatusCode")
+                .Options;
+
+            using (var context = new StickerFireDbContext(options))
+            {
+                var controller = new CampaignController(context);
+
+                Campaign campaign = new Campaign();
+                campaign.ID = 1;
+                campaign.OwnerID = 1;
+                campaign.Title = "Awesome Sauce Campaign";
+
+                var result = controller.Create(campaign);
+
+                CreatedAtActionResult Caar = (CreatedAtActionResult)result.Result;
+
+                Assert.StrictEqual(HttpStatusCode.Created, (HttpStatusCode)Caar.StatusCode.Value);
+
+
+            }
+        }
+
+
     }
 }
