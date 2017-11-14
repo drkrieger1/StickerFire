@@ -8,18 +8,18 @@ namespace StickerFire.Models
 {
     public class Campaign
     {   
-        [Key]
-        int ID { get; set; }
-        int OwnerID { get; set; }
-        int Votes { get; set; }
-        int Views { get; set; }
+        
+       int ID { get; set; }
+       int OwnerID { get; set; }
+       int Votes { get; set; }
+       int Views { get; set; }
 
-        string ImgPath { get; set; }
-        string Descrition { get; set; }
-        string DenyMessage { get; set; }
+       string ImgPath { get; set; }
+       string Descrition { get; set; }
+       string DenyMessage { get; set; }
 
-        bool Published { get; set; }
-        bool Active { get; set; }
+       bool Published { get; set; }
+       bool Active { get; set; }
 
         Category Category { get; set; }
         Status Status { get; set; }
