@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.EntityFrameworkCore;
 using StickerFire.Data;
 using StickerFire.Models;
@@ -11,6 +12,7 @@ namespace StickerFire.Controllers
 {
     public class CampaignController : Controller
     {
+
         private readonly StickerFireDbContext _Context;
 
         public CampaignController(StickerFireDbContext context)
@@ -24,6 +26,7 @@ namespace StickerFire.Controllers
             return View(await _Context.Campaign.ToListAsync());
         }
         //Get the create View
+
         public IActionResult Create()
         {
             return View();

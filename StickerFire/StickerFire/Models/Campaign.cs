@@ -7,24 +7,26 @@ using System.Threading.Tasks;
 namespace StickerFire.Models
 {
     public class Campaign
-    {   
-        
-       int ID { get; set; }
-       int OwnerID { get; set; }
-       int Votes { get; set; }
-       int Views { get; set; }
 
-       string ImgPath { get; set; }
-       string Descrition { get; set; }
-       string DenyMessage { get; set; }
+    {
+        public int ID { get; set; }
+        public int OwnerID { get; set; }
+        public int Votes { get; set; }
+        public  int Views { get; set; }
 
-       bool Published { get; set; }
-       bool Active { get; set; }
+        public string Title { get; set; }
+        public string ImgPath { get; set; }
+        public string Description { get; set; }
+        public string DenyMessage { get; set; }
 
-        Category Category { get; set; }
-        Status Status { get; set; }
+        public bool Published { get; set; }
+        public bool Active { get; set; }
+
+
+        public Category Category { get; set; }
+        public Status Status { get; set; }
         //Votes Voters 
-        DateTime Expiration { get; set; }
+        public DateTime Expiration { get; set; }
 
     }
 }

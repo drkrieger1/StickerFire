@@ -1,42 +1,44 @@
-﻿@*@model StickerFire.Models.*@
+﻿@model StickerFire.Models.Campaign
+@using StickerFire.Data;
+@using StickerFire.Models;
 
-<h2>Make a New Sticker Campaign</h2>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+@{
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <h2>Make a New Sticker Campaign</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 @*Name of the campain*@
-            <label asp-for="Name" class="control-label">Campaign Name</label>
-            <div class="form-group">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-
-            <div>
-                @*select list for category*@
-                <label asp-for="Category" class="control-label">Select Category</label>
-                <div>
-                    <select asp-for="CampaignCategory" asp-items="Model.category">
-                        <option value="">Select All</option>
-                    </select>
-
-                    <input type="submit" value="Select" />
+                <label asp-for="Title" class="control-label">Campaign Name</label>
+                <div class="form-group">
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
-            </div>
+               
+                <div>
+                    <label asp-for="Category" class="control-label">Select Category</label>
+                    <select asp-for="Category" class="form-control" asp-items="Html.GetEnumSelectList<Category>()"></select>
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
 
                 @*Description of the campain*@
-            <label asp-for="Description" class="control-label">Campaign Description</label>
-            <div class="form-group">
-                <textarea asp-for="Description" class="form-control"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
+                <label asp-for="Description" class="control-label">Campaign Description</label>
+                <div class="form-group">
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
 
-        </form>
-        @*form for upload file*@
-        <form method="post" runat="server" enctype="multipart/form-data">
-            <input type="file" runat="server" />
+            </form>
+            @*form for upload file*@
+            <form method="post" runat="server" enctype="multipart/form-data">
+                <input type="file" runat="server" />
 
-        </form>
+            </form>
+        </div>
     </div>
 </div>

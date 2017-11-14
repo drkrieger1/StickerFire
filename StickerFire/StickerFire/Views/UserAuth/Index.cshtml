@@ -1,0 +1,53 @@
+﻿@model StickerFire.Models.RegisterViewModel
+@{
+    Layout = "_Layout";
+}
+<style>
+   
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 login">
+            <form method="post">
+                <h2>Login</h2>
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" />
+                <br />
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" />
+                <br />
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        </div>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                <h2>Register</h2>
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+                <br />
+
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" />
+                <span asp-validation-for="Password"></span>
+                <br />
+
+                <label asp-for="ConfirmPassword">Confirm Password</label>
+                <input asp-for="ConfirmPassword" />
+                <span asp-validation-for="ConfirmPassword"></span>
+                <br />
+
+                <button type="submit">Register</button>
+            </form>
+        </div>
+        </div>
+    </div>
+
+
+
+
