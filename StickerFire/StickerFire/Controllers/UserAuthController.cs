@@ -1,5 +1,6 @@
 
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StickerFire.Models;
@@ -35,10 +36,11 @@ namespace StickerFire.Controllers
         //Register regular user
         [HttpPost]
         public async Task<IActionResult> Register(MegaViewModel rvm, string returnUrl = null)
-            {
+        {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
+
                 var user = new ApplicationUser { UserName = rvm.RegisterViewModel.Email, Email = rvm.RegisterViewModel.Email };
                 var result = await _userManager.CreateAsync(user, rvm.RegisterViewModel.Password);
 
@@ -53,6 +55,7 @@ namespace StickerFire.Controllers
 
 
         //Admin Registration form
+        [Authorize(Policy = "Admin Only")]
         [HttpGet]
         public IActionResult RegisterAdmin(string returnUrl = null)
         {
@@ -61,6 +64,7 @@ namespace StickerFire.Controllers
         }
 
         //Register Admin user
+        [Authorize(Policy = "Admin Only")]
         [HttpPost]
         public async Task<IActionResult> RegisterAdmin(MegaViewModel avm, string returnUrl = null)
         {

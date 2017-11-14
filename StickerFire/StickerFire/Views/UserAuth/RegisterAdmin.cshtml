@@ -1,0 +1,27 @@
+﻿@model StickerFire.Models.MegaViewModel
+@{
+    Layout = "_Layout";
+}
+<div class="row">
+    <div class="col-lg-2">
+        <form asp-action="RegisterAdmin" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <h2>Register</h2>
+            <label asp-for="RegisterViewModel.Email">Email</label>
+            <input asp-for="RegisterViewModel.Email" />
+            <span asp-validation-for="RegisterViewModel.Email"></span>
+            <br />
+
+            <label asp-for="RegisterViewModel.Password">Password</label>
+            <input asp-for="RegisterViewModel.Password" />
+            <span asp-validation-for="RegisterViewModel.Password"></span>
+            <br />
+
+            <label asp-for="RegisterViewModel.ConfirmPassword">Confirm Password</label>
+            <input asp-for="RegisterViewModel.ConfirmPassword" />
+            <span asp-validation-for="RegisterViewModel.ConfirmPassword"></span>
+            <br />
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>

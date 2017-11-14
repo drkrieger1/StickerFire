@@ -7,11 +7,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
+using Microsoft.AspNetCore.Identity;
 
 namespace StickerFire.Controllers
 {
     public class CampaignController : Controller
     {
+
 
         private readonly StickerFireDbContext _Context;
         //Cunstructor to requier a DbContext 
@@ -51,22 +57,25 @@ namespace StickerFire.Controllers
         //Post method to bind the entered campaign information into the database with AntiForgery Token
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult>Create([Bind("ID,OwnerID,Votes,Views,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign)
+        public async Task<IActionResult> Create([Bind("ID,OwnerID,Votes,Views,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign)
         {
             if (ModelState.IsValid)
             {
                 _Context.Add(campaign);
                 await _Context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // return RedirectToAction(nameof(Index));
             }
+            return CreatedAtAction("Create", new { id = campaign.ID }, campaign);
 
-            return View(campaign);
+            //return View(campaign);
         }
+
 
         //This Method will find the selected campaing and render the page for editing
         public async Task<IActionResult>Edit(int? id)
+
         {
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -74,7 +83,7 @@ namespace StickerFire.Controllers
             var campaign = await _Context.Campaign
                 .SingleOrDefaultAsync(c => c.ID == id);
 
-            if(campaign == null)
+            if (campaign == null)
             {
                 return NotFound();
             }
