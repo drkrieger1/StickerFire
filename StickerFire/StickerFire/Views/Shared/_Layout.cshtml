@@ -37,7 +37,7 @@
             <ul class="nav navbar-nav navbar-right">
                 @if (!User.Identities.Any(u => u.IsAuthenticated))
                 {
-                    <li><a asp-controller="UserAuth" asp-action="Index"><span class="glyphicon glyphicon-user"></span>Login/Register</a></li>
+                    <li><a asp-controller="UserAuth" asp-action="Index"><span class="glyphicon glyphicon-user"></span> Login/Register</a></li>
                     
                 }
                 else
@@ -46,7 +46,10 @@
                         Hello @User.Identities.First(u => u.IsAuthenticated &&
                   u.HasClaim(c => c.Type == ClaimTypes.Name)).FindFirst(ClaimTypes.Name).Value
                     </li>
-
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-controller="User" asp-action="Index"><span class="glyphicon glyphicon-user"></span> Manage Users</a></li>
+                    }
                 }
             </ul>
         </div>

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace StickerFire.Controllers
 {
-   // [Authorize(Policy = "Admin Only")]
+   [Authorize(Policy = "Admin Only")]
     public class UserController : Controller
     {
         private readonly UserDbContext _context;
