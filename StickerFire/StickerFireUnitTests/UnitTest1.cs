@@ -25,7 +25,7 @@ namespace StickerFireUnitTests
         //}
         public class UnitTest2
         {
-            
+
             [Fact]
             public void UserNameIsValid()
             {
@@ -189,6 +189,21 @@ namespace StickerFireUnitTests
                 Assert.Equal(testVotes, 25);
             }
 
+            [Fact]
+            public void UserHasName()
+            {
+                //Arrange
+                ApplicationUser user = new ApplicationUser
+                {
+                    UserName = "TestUser",
+                };
+                //Act
+                string testUser = user.UserName;
+
+                //Assert
+                Assert.Equal(testUser, "TestUser");
+            }
+
 
             [Fact]
             public void StickerFireDbContent()
@@ -215,6 +230,8 @@ namespace StickerFireUnitTests
                     Assert.Equal(1, number);
                 }
             }
+
+            
 
             [Fact]
             public void StickerFireDbStatus()
