@@ -1,5 +1,6 @@
 
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StickerFire.Models;
@@ -54,6 +55,7 @@ namespace StickerFire.Controllers
 
 
         //Admin Registration form
+        [Authorize(Policy = "Admin Only")]
         [HttpGet]
         public IActionResult RegisterAdmin(string returnUrl = null)
         {
@@ -62,6 +64,7 @@ namespace StickerFire.Controllers
         }
 
         //Register Admin user
+        [Authorize(Policy = "Admin Only")]
         [HttpPost]
         public async Task<IActionResult> RegisterAdmin(MegaViewModel avm, string returnUrl = null)
         {
