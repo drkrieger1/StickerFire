@@ -37,17 +37,19 @@ namespace StickerFire.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 campaigns = campaigns.Where(c => c.Title.Contains(searchString));
+                return View(campaigns);
             }
             Category Empty = default(Category);
             if (category != Empty)
             {
                 campaigns = campaigns.Where(c => c.Category == category);
+                return View(campaigns);
             }
             List<Campaign> campaignAll = new List<Campaign>();
             campaignAll = await campaigns.ToListAsync();
 
             //return View(await _Context.Campaign.ToListAsync());
-            return View(campaignAll);
+            return View(campaigns);
         }
         //Get the create View
         public IActionResult Create()
@@ -63,11 +65,11 @@ namespace StickerFire.Controllers
             {
                 _Context.Add(campaign);
                 await _Context.SaveChangesAsync();
-                // return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
-            return CreatedAtAction("Create", new { id = campaign.ID }, campaign);
+            //return CreatedAtAction("Create", new { id = campaign.ID }, campaign);
 
-            //return View(campaign);
+            return View(campaign);
         }
 
 

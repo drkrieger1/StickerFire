@@ -1,6 +1,6 @@
 
 ﻿.
-@model StickerFire.Models.Campaign; 
+@model IEnumerable<StickerFire.Models.Campaign>; 
 @using StickerFire.Models;
 @{ 
     Layout = "_Layout";
@@ -11,14 +11,19 @@
 <p>
     <a asp-action="Create">Create new campaign </a>
 </p>
-
-<form asp-controller="Campaign" asp-action="Index" method="get">
-    <p>
-        <select asp-for="Category" asp-items="Html.GetEnumSelectList<Category>()">
-            <option value="">ALL</option>
-        </select>
-
-        <input type="submit" value="Filter" />
-    </p>
-</form>
-
+<div class="container">
+    <div class="row">
+        @{ 
+            foreach(var item in Model)
+            {  
+                <div class="col-lg-2">
+                    <img src="http://via.placeholder.com/140x150"/>
+                    <h1>@Html.DisplayFor(modelItem => item.Title)</h1>                     
+                    <p>Votes:@Html.DisplayFor(modelItem => item.Votes) | Views:@Html.DisplayFor(modelItem => item.Views)</p>                   
+                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                </div>
+         
+            }
+        }
+    </div>
+</div>
