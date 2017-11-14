@@ -123,6 +123,21 @@ namespace StickerFireUnitTests
             Assert.Equal(testTitle, "Test Campaign Title");
         }
 
+        [Fact]
+        public void CampaignDenyMessage()
+        {
+            //Arrange
+            Campaign campaign = new Campaign
+            {
+                DenyMessage = "Test Deny Message",
+            };
+            //Act
+            string testDeny = campaign.DenyMessage;
+
+            //Assert
+            Assert.Equal(testDeny, "Test Deny Message");
+        }
+
 
 
         [Fact]
