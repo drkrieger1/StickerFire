@@ -7,6 +7,6 @@ namespace StickerFire.Models
 {
     public enum Category
     {
-        Animals, Cars, Flags, Flowers, Funny, Graffiti, Holidays, Lables, Love, Mashup, Patriotic, Programing, Rastafari, Religious, Satire, SkateBoarding, Tattoos, Text, Trendy 
+        Animals, Cars, Flags, Flowers, Funny, Graffiti, Holidays, Lables, Love, Mashup, Patriotic, Programing, Rastafari, Religious, Satire, SkateBoarding, Tattoos, Text, Trendy
     }
 }
