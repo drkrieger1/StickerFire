@@ -108,6 +108,21 @@ namespace StickerFireUnitTests
             Assert.Equal(testMail, "test@mail.com");
         }
 
+        [Fact]
+        public void CampaignTitle()
+        {
+            //Arrange
+            Campaign campaign = new Campaign
+            {
+                Title = "Test Campaign Title",
+            };
+            //Act
+            string testTitle = campaign.Title;
+
+            //Assert
+            Assert.Equal(testTitle, "Test Campaign Title");
+        }
+
 
 
         [Fact]
