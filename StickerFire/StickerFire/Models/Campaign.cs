@@ -26,7 +26,6 @@ namespace StickerFire.Models
         public Category Category { get; set; }
         public Status Status { get; set; }
         //Votes Voters 
-        public DateTime Expiration { get; set; }
-
+        public DateTime Expiration { get; set; }       
     }
 }

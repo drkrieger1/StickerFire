@@ -1,3 +1,24 @@
-﻿@{
+
+﻿.
+@model StickerFire.Models.Campaign; 
+@using StickerFire.Models;
+@{ 
     Layout = "_Layout";
 }
+
+<h1>This is the Campaign index page</h1>
+
+<p>
+    <a asp-action="Create">Create new campaign </a>
+</p>
+
+<form asp-controller="Campaign" asp-action="Index" method="get">
+    <p>
+        <select asp-for="Category" asp-items="Html.GetEnumSelectList<Category>()">
+            <option value="">ALL</option>
+        </select>
+
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
