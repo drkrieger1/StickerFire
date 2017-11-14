@@ -12,8 +12,9 @@ namespace StickerFire.Models
         public int Votes { get; set; }
         public  int Views { get; set; }
 
+        public string Title { get; set; }
         public string ImgPath { get; set; }
-        public string Descrition { get; set; }
+        public string Description { get; set; }
         public string DenyMessage { get; set; }
 
         public bool Published { get; set; }
