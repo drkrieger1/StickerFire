@@ -36,9 +36,16 @@ namespace StickerFire
                 options.Filters.Add(new RequireHttpsAttribute());
             });
 
+            //Enable Cookies
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie("CookieLogin", options =>
                 options.AccessDeniedPath = new PathString("/Account/Forbidden/"));
+
+            //Enable Admin-Only policy
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin Only", policy => policy.RequireRole("Admin"));
+            });
 
             // This context is derived from IdentityDbContext. This context is responsible for the ASPNET Identity tables in the database. 
             services.AddDbContext<UserDbContext>(options =>
