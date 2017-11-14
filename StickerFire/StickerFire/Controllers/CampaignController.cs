@@ -45,5 +45,21 @@ namespace StickerFire.Controllers
 
             return View(campaign);
         }
+
+        public async Task<IActionResult>Edit(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var campaign = await _Context.Campaign.SingleOrDefaultAsync(c => c.ID == id);
+
+            if(campaign == null)
+            {
+                return NotFound();
+            }
+            return View(campaign);
+        }
     }
 }
