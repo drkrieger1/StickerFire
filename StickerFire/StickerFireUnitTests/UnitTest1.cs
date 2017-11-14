@@ -25,6 +25,32 @@ namespace StickerFireUnitTests
         //}
         public class UnitTest2
         {
+            //[Fact]
+            //public void UserDbContent()
+            //{
+            //    var options = new DbContextOptionsBuilder<UserDbContext>()
+            //        .UseInMemoryDatabase(databaseName: "getStatusCode")
+            //        .Options;
+
+            //    using (var context = new UserDbContext(options))
+            //    {
+            //        var controller = new UserController(context);
+
+            //        ApplicationUser user = new ApplicationUser();
+            //        user.Email = "test@email.com";
+            //        user.UserName = "TestUserName";
+
+            //        var result = controller.(user.ToString());
+
+            //        var find = context.ApplicationUser.FirstOrDefaultAsync(t => t.UserName == user.UserName);
+
+            //        int number = context.ApplicationUser.Local.Count;
+
+                    
+
+            //        Assert.Equal(1, number);
+            //    }
+            //}
 
             [Fact]
             public void UserNameIsValid()
@@ -100,6 +126,37 @@ namespace StickerFireUnitTests
             }
 
             [Fact]
+            public void CampaignImgPath()
+            {
+                //Arrange
+                Campaign campaign = new Campaign
+                {
+                    ImgPath = "img/test/path/",
+                };
+                //Act
+                string testImgPath = campaign.ImgPath;
+
+                //Assert
+                Assert.Equal(testImgPath, "img/test/path/");
+            }
+
+            [Fact]
+            public void CampaignDenyMessage()
+            {
+                //Arrange
+                Campaign campaign = new Campaign
+                {
+                    DenyMessage = "Test Deny Message",
+                };
+                //Act
+                string testDeny = campaign.DenyMessage;
+
+                //Assert
+                Assert.Equal(testDeny, "Test Deny Message");
+            }
+
+
+            [Fact]
             public void CampaignPublished()
             {
                 //Arrange
@@ -129,21 +186,7 @@ namespace StickerFireUnitTests
                 Assert.Equal(testActive, true);
             }
 
-            [Fact]
-            public void CampaignDenyMessage()
-            {
-                //Arrange
-                Campaign campaign = new Campaign
-                {
-                    DenyMessage = "Test Deny Message",
-                };
-                //Act
-                string testDeny = campaign.DenyMessage;
-
-                //Assert
-                Assert.Equal(testDeny, "Test Deny Message");
-            }
-
+            
             [Fact]
             public void CampaignDescription()
             {
@@ -190,6 +233,21 @@ namespace StickerFireUnitTests
             }
 
             [Fact]
+            public void CampaignOwnderId()
+            {
+                //Arrange
+                Campaign campaign = new Campaign
+                {
+                    OwnerID = 1,
+                };
+                //Act
+                int testOwnerId = campaign.OwnerID;
+
+                //Assert
+                Assert.Equal(testOwnerId, 1);
+            }
+
+            [Fact]
             public void UserHasName()
             {
                 //Arrange
@@ -230,8 +288,6 @@ namespace StickerFireUnitTests
                     Assert.Equal(1, number);
                 }
             }
-
-            
 
             [Fact]
             public void StickerFireDbStatus()
