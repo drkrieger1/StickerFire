@@ -1,4 +1,6 @@
-﻿@*@model StickerFire.Models.*@
+﻿@model StickerFire.Models.Campaign
+@using StickerFire.Data;
+@using StickerFire.Models;
 
 @{
     Layout = "_Layout";
@@ -12,22 +14,16 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 @*Name of the campain*@
-                <label asp-for="Name" class="control-label">Campaign Name</label>
+                <label asp-for="Title" class="control-label">Campaign Name</label>
                 <div class="form-group">
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
-
+               
                 <div>
-                    @*select list for category*@
                     <label asp-for="Category" class="control-label">Select Category</label>
-                    <div>
-                        <select asp-for="CampaignCategory" asp-items="Model.category">
-                            <option value="">Select All</option>
-                        </select>
-
-                        <input type="submit" value="Select" />
-                    </div>
+                    <select asp-for="Category" class="form-control" asp-items="Html.GetEnumSelectList<Category>()"></select>
+                    <span asp-validation-for="Category" class="text-danger"></span>
                 </div>
 
                 @*Description of the campain*@
