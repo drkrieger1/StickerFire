@@ -103,14 +103,17 @@ namespace StickerFire.Controllers
                 return NotFound();
             }
 
+
             var theUser = await _context.ApplicationUser
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (theUser == null)
+
             {
                 return NotFound();
             }
 
             return View(theUser);
+
         }
 
         // POST: User/Delete/5
