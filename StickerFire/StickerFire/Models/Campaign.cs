@@ -13,11 +13,20 @@ namespace StickerFire.Models
 
         public int OwnerID { get; set; }
 
+        [Range(0, Int32.MaxValue)]
         public int Votes { get; set; }
+
+        [Range(0, Int32.MaxValue)]
         public int Views { get; set; }
 
+        [RegularExpression(@"^\S*$", ErrorMessage = "No white space!")]
+        [Required]
         public string Title { get; set; }
+
         public string ImgPath { get; set; }
+
+        [Required]
+        [StringLength(400)]
         public string Description { get; set; }
         public string DenyMessage { get; set; }
 
