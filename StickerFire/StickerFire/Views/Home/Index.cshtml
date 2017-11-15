@@ -1,7 +1,67 @@
 @{
     Layout = "_Layout";
 }
-﻿<h1>You reached the default home view</h1>
+<style>
+    .Image {
+        max-height: 150px;
+        margin: 0 auto;
+    }
+   .campaignButton{
+       text-align:center;
+   }
+   a{
+       text-align:center;
+   }
 
-<a asp-controller="Campaign" asp-action="Index">Campaign Index</a>
+    h3 {
+        text-align: center;
+    }
+</style>
+
+<div id="myCarousel" class="carousel slide">
+    <div class="carousel-inner">
+        <div class="item active">
+            <img class="Image" src="~/images/Stickerfire Sticker.png">
+            <div class="container">
+                <div class="carousel-caption">
+                </div>
+                <h3>Welcome To StickerFire!</h3>
+                
+            </div>
+             
+        </div>
+        <div class="item">
+            <img class="Image" src="~/images/TurtleBird_Logo.png" alt="">
+            <div class="container">
+                <div class="carousel-caption">
+
+                </div>
+                <h3>Upload your favorite sticker ideas!</h3>
+
+            </div>
+        </div>
+        <div class="item">
+            <img class="Image" src="~/images/sficon.png" alt="">
+            <div class="container">
+                <div class="carousel-caption">
+                </div>
+                <h3>Successful Campaigns go into production</h3>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev"></a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next"></a>
+</div>
+<div>
+    <div
+    <form asp-controller="Campaign" asp-action="Index">
+    <button type="submit">Active Campaigns</button>
+    </form>
+
+</div>
+
+
+
+
+
 
