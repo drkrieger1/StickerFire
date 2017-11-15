@@ -16,14 +16,16 @@ using Microsoft.AspNetCore.Identity;
 namespace StickerFire.Controllers
 {
     public class CampaignController : Controller
-    {
-
+    {   
 
         private readonly StickerFireDbContext _Context;
+        private readonly UserManager<ApplicationUser> _user;
+
         //Cunstructor to requier a DbContext 
-        public CampaignController(StickerFireDbContext context)
+        public CampaignController(UserManager<ApplicationUser> userManager,StickerFireDbContext context)
         {
             _Context = context;
+            _user = userManager;
         }
 
         //Index Gathering all campaigns from the Context
@@ -59,15 +61,25 @@ namespace StickerFire.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,OwnerID,Votes,Views,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign)
         {
+            string userEmail = HttpContext.User.Identity.Name;
+
+            ApplicationUser user = await _user.FindByEmailAsync(userEmail);
+
             if (ModelState.IsValid)
             {
+               // Blob.ConnectToContainer(userId);
                 _Context.Add(campaign);
                 await _Context.SaveChangesAsync();
-                // return RedirectToAction(nameof(Index));
+                await Blob.MakeAContainer(user.Id);
+                await Blob.UploadBlob(user.Id);
+                //return RedirectToAction(nameof(Index));
+
+                return CreatedAtAction("Create", new { id = campaign.ID }, campaign);
             }
-            return CreatedAtAction("Create", new { id = campaign.ID }, campaign);
 
             //return View(campaign);
+            return View();
+
         }
 
 
