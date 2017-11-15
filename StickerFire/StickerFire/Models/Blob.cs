@@ -20,7 +20,7 @@ namespace StickerFire.Models
                 storageAccount = new CloudStorageAccount(
              new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
              "stickerfireblob",
-             "35haxRA/RP4oE5X1QOt4A1neoNAqBFqgXWm0d41uBhPOL2QTS704DgusJsqBiJdC93xPcP90YeeHgKT09SwoRg=="), true);
+             "/uQU92fEI5O3MetZ6Mc+Yvi4Y2g14RfFuIUib8a7p/3AxT1fTFA5S8/+QaWbZhtslQM+tOZMz2sF6udHXElACQ=="), true);
             }
             catch (StorageException e)
             {
@@ -28,7 +28,6 @@ namespace StickerFire.Models
             }
             // Create a blob client.
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-
             // Get a reference to a container named "<userid>conntainer"
             CloudBlobContainer container = blobClient.GetContainerReference($"{id}container");
             
@@ -42,11 +41,12 @@ namespace StickerFire.Models
             await container.CreateIfNotExistsAsync();
         }
 
-        public static void GetABlob(string id)
+        public static void GetABlob(string id, string name)
         {
             var container = ConnectToContainer(id);
 
-            //await Blob.GetABlob(user.Id);
+            // Get a reference to a blob of a specific name.
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(name);
 
         }
 
@@ -58,8 +58,7 @@ namespace StickerFire.Models
             {
                 PublicAccess = BlobContainerPublicAccessType.Blob
             });
-            // Create or overwrite the "myblob" blob with the contents of a local file
-            // named "myfile".
+            // Create or overwrite the selected blob with the contents of a local file             
             using (var fileStream = System.IO.File.OpenRead(@path))
             {
 

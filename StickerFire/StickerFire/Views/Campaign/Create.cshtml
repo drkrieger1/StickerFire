@@ -5,12 +5,28 @@
 @{
     Layout = "_Layout";
 }
+<script runat="server">
+    void SubmitButton_Click(Object sender, EventArgs e) {
+       if (File1.PostedFile != null) {
+          try {
+             File1.PostedFile.SaveAs("~/images/uploadedfile.txt");
+             Span1.InnerHtml = "Upload Successful!";
+          }
+          catch (Exception ex) {
+             Span1.InnerHtml = "Error saving file <b>C:\\" +
+                File1.Value + "</b><br>" + ex.ToString();
+          }
+       }
+    }
+</script>
 
 <div class="container">
     <h2>Make a New Sticker Campaign</h2>
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Create">
+            @*<form asp-action="Create" / original version>*@
+            <form asp-action="Create" runat="server" enctype="multipart/form-data">
+                @*New Verstion*@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 @*Name of the campain*@
@@ -19,7 +35,7 @@
                     <input asp-for="Title" class="form-control" />
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
-               
+
                 <div>
                     <label asp-for="Category" class="control-label">Select Category</label>
                     <select asp-for="Category" class="form-control" asp-items="Html.GetEnumSelectList<Category>()"></select>
@@ -33,23 +49,24 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 
-            @*form for upload file*@
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <p>Upload one or more files using this form:</p>
-                            <input asp-for="ImgPath" type="file" name="ImgPath" />
-                        </div>
+                @*form for upload file / original version*@
+                @*<div class="form-group">
+                    <div class="col-md-10">
+                        <p>Upload one or more files using this form:</p>
+                        <input asp-for="ImgPath" value="ImgPath" type="file" name="ImgPath" />
                     </div>
-                    @*<div class="form-group">
-                        <div class="col-md-10">
-                            <input type="submit" value="Upload" />
-                        </div>
-                    </div>*@
+                </div>*@
+                Select a file to upload:<br />
+                <input type="file" id="File1" runat="Server">
+                <p>
+                    <input type="submit" id="Submit1" runat="Server"
+                           value="Upload File" OnServerClick="SubmitButton_Click" asp-for="ImgPath" >
+                <p>
+                    <span id="Span1" runat="Server" />
 
-               @* form submit button *@
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
+                    @*<div class="form-group"> //original button
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>*@
             </form>
         </div>
     </div>

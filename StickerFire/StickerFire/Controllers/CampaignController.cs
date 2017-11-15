@@ -12,6 +12,7 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 using Microsoft.AspNetCore.Identity;
+using System.IO;
 
 namespace StickerFire.Controllers
 {
@@ -31,7 +32,7 @@ namespace StickerFire.Controllers
         //Index Gathering all campaigns from the Context
         public async Task<IActionResult> Index(Category? category, string searchString)
         {
-          
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 
@@ -70,17 +71,17 @@ namespace StickerFire.Controllers
         public async Task<IActionResult> Create([Bind("ID,OwnerID,Votes,Views,Title,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign)
         {
             string userEmail = HttpContext.User.Identity.Name;
-
             ApplicationUser user = await _user.FindByEmailAsync(userEmail);
 
             if (ModelState.IsValid)
             {
                 var title = campaign.Title;
                 var path = campaign.ImgPath;
+                //var path = new FileInfo(campaign.ImgPath).Directory;
 
                 await Blob.MakeAContainer(user.Id);
                 await Blob.UploadBlob(user.Id, title, path);
-
+                
 
                 _Context.Add(campaign);
                 await _Context.SaveChangesAsync();
