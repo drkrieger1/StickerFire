@@ -9,17 +9,17 @@ using StickerFire.Data;
 using StickerFire.Models;
 using System;
 
-namespace StickerFire.Migrations.StickerFireDb
+namespace StickerFire.Migrations
 {
     [DbContext(typeof(StickerFireDbContext))]
-    [Migration("20171114013934_CampaignAdd")]
-    partial class CampaignAdd
+    [Migration("20171115034330_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("StickerFire.Models.Campaign", b =>
@@ -33,19 +33,22 @@ namespace StickerFire.Migrations.StickerFireDb
 
                     b.Property<string>("DenyMessage");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(400);
 
                     b.Property<DateTime>("Expiration");
 
                     b.Property<string>("ImgPath");
 
-                    b.Property<int>("OwnerID");
+                    b.Property<string>("OwnerID");
 
                     b.Property<bool>("Published");
 
                     b.Property<int>("Status");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.Property<int>("Views");
 
