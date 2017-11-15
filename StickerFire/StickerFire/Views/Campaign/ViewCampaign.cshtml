@@ -1,0 +1,13 @@
+﻿@model StickerFire.Models.Campaign
+@{
+    Layout = "_Layout";
+}
+<div class="container">
+<h1>@Html.DisplayFor(modelItem => Model.Title)</h1>
+    <img class="Sticker" src="~/images/@Model.ImgPath" />
+    <p>Votes:@Html.DisplayFor(modelItem => Model.Votes) | Views:@Html.DisplayFor(modelItem => Model.Views)</p>
+    <h2>About this Sticker:</h2>
+    <p>@Html.DisplayFor(modelItem => Model.Description)</p>
+</div>
+
+
