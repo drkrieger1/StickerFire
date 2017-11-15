@@ -31,7 +31,7 @@ namespace StickerFire.Controllers
         //Index Gathering all campaigns from the Context
         public async Task<IActionResult> Index(Category? category, string searchString)
         {
-            
+          
             if (!String.IsNullOrEmpty(searchString))
             {
                 
@@ -46,6 +46,19 @@ namespace StickerFire.Controllers
             return View(await _Context.Campaign.ToListAsync());
             
         }
+        //MyCampaigns: This will navigate to the users campaign campaigns
+
+        public async Task<IActionResult> MyCampaigns()
+        {
+            string userEmail = HttpContext.User.Identity.Name;
+
+            ApplicationUser user = await _user.FindByEmailAsync(userEmail);
+
+            var myCampaigns = await _Context.Campaign.Where(c => c.OwnerID == user.Id).ToListAsync();
+
+            return View(myCampaigns);
+        }
+
         //Get the create View
         public IActionResult Create()
         {
@@ -59,23 +72,23 @@ namespace StickerFire.Controllers
             string userEmail = HttpContext.User.Identity.Name;
 
             ApplicationUser user = await _user.FindByEmailAsync(userEmail);
-            campaign.OwnerID = user.Id;
 
             if (ModelState.IsValid)
             {
-                 _Context.Add(campaign);
-
                 var title = campaign.Title;
                 var path = campaign.ImgPath;
 
                 await Blob.MakeAContainer(user.Id);
                 await Blob.UploadBlob(user.Id, title, path);
 
-                await _Context.SaveChangesAsync();
 
+                _Context.Add(campaign);
+                await _Context.SaveChangesAsync();
+                //return CreatedAtAction("Create", new { id = campaign.ID }, campaign);
             return RedirectToAction(nameof(Index));
             }
 
+            //return View(campaign);
             return View();
 
 

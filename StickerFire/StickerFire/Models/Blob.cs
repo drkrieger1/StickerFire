@@ -24,7 +24,7 @@ namespace StickerFire.Models
             }
             catch (StorageException e)
             {
-                Console.WriteLine();
+                Console.WriteLine(e);
             }
             // Create a blob client.
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();

@@ -9,7 +9,7 @@ using StickerFire.Data;
 using StickerFire.Models;
 using System;
 
-namespace StickerFire.Migrations.StickerFireDb
+namespace StickerFire.Migrations
 {
     [DbContext(typeof(StickerFireDbContext))]
     partial class StickerFireDbContextModelSnapshot : ModelSnapshot
@@ -18,7 +18,7 @@ namespace StickerFire.Migrations.StickerFireDb
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("StickerFire.Models.Campaign", b =>
@@ -46,7 +46,8 @@ namespace StickerFire.Migrations.StickerFireDb
 
                     b.Property<int>("Status");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.Property<int>("Views");
 
