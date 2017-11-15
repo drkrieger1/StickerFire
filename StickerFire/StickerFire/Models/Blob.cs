@@ -20,7 +20,7 @@ namespace StickerFire.Models
                 storageAccount = new CloudStorageAccount(
              new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
              "stickerfireblob",
-             "35haxRA/RP4oE5X1QOt4A1neoNAqBFqgXWm0d41uBhPOL2QTS704DgusJsqBiJdC93xPcP90YeeHgKT09SwoRg=="), true);
+             "/uQU92fEI5O3MetZ6Mc+Yvi4Y2g14RfFuIUib8a7p/3AxT1fTFA5S8/+QaWbZhtslQM+tOZMz2sF6udHXElACQ=="), true);
             }
             catch (StorageException e)
             {

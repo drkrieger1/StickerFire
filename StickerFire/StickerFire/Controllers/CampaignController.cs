@@ -31,9 +31,7 @@ namespace StickerFire.Controllers
         //Index Gathering all campaigns from the Context
         public async Task<IActionResult> Index(Category? category, string searchString)
         {
-            //IQueryable<Category> categoryQuery = from cat in _Context.Campaign
-            //                              orderby cat.Category
-            //                              select cat.Category;
+            
             if (!String.IsNullOrEmpty(searchString))
             {
                 
@@ -44,8 +42,6 @@ namespace StickerFire.Controllers
             {
                 return View(await _Context.Campaign.Where(c => c.Category == category).ToListAsync());
             }
-            //List<Campaign> campaignAll = new List<Campaign>();
-            //campaignAll = await campaigns.ToListAsync();
 
             return View(await _Context.Campaign.ToListAsync());
             
@@ -63,23 +59,23 @@ namespace StickerFire.Controllers
             string userEmail = HttpContext.User.Identity.Name;
 
             ApplicationUser user = await _user.FindByEmailAsync(userEmail);
+            campaign.OwnerID = user.Id;
 
             if (ModelState.IsValid)
             {
+                 _Context.Add(campaign);
+
                 var title = campaign.Title;
                 var path = campaign.ImgPath;
 
                 await Blob.MakeAContainer(user.Id);
                 await Blob.UploadBlob(user.Id, title, path);
 
-
-                _Context.Add(campaign);
                 await _Context.SaveChangesAsync();
-                //return CreatedAtAction("Create", new { id = campaign.ID }, campaign);
+
             return RedirectToAction(nameof(Index));
             }
 
-            //return View(campaign);
             return View();
 
 

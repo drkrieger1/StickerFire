@@ -12,9 +12,10 @@ using System;
 namespace StickerFire.Migrations.StickerFireDb
 {
     [DbContext(typeof(StickerFireDbContext))]
-    partial class StickerFireDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171115180051_OwnerID")]
+    partial class OwnerID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +47,8 @@ namespace StickerFire.Migrations.StickerFireDb
 
                     b.Property<int>("Status");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.Property<int>("Views");
 
