@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using StickerFire.Models;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,13 @@ namespace StickerFire.Controllers
         //Dependancy injection for userManager and signInManager
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ILogger _logger;
 
-        public UserAuthController(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signInManager)
+        public UserAuthController(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signInManager, ILogger<UserAuthController> logger)
         {
             _userManager = usermanager;
             _signInManager = signInManager;
+            _logger = logger;
         }
 
         //Regular user signup/registration page
@@ -124,6 +127,15 @@ namespace StickerFire.Controllers
             string error = "Unable to log you in.  Please try again or contact your system admin.";
             ModelState.AddModelError("", error);
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
 
