@@ -48,8 +48,6 @@ namespace StickerFire.Controllers
                 var result = await _userManager.CreateAsync(user, rvm.RegisterViewModel.Password);
                 if (result.Succeeded)
                 {
-                    await Blob.MakeAContainer(user.Id);
-                    await Blob.UploadBlob(user.Id);
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }

@@ -50,14 +50,19 @@ namespace StickerFire.Models
 
         }
 
-        public static async Task UploadBlob(string id)
+        public static async Task UploadBlob(string id, string title, string path)
         {
             var container = ConnectToContainer(id);
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference("referenceName");
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(title);
+            await container.SetPermissionsAsync(new BlobContainerPermissions
+            {
+                PublicAccess = BlobContainerPublicAccessType.Blob
+            });
             // Create or overwrite the "myblob" blob with the contents of a local file
             // named "myfile".
-            using (var fileStream = System.IO.File.OpenRead(@""))
+            using (var fileStream = System.IO.File.OpenRead(@path))
             {
+
                 await blockBlob.UploadFromStreamAsync(fileStream);
             }
         }
