@@ -232,88 +232,88 @@ namespace StickerFireUnitTests
                 Assert.Equal(testVotes, 25);
             }
 
-            [Fact]
-            public void CampaignOwnderId()
-            {
-                //Arrange
-                Campaign campaign = new Campaign
-                {
-                    OwnerID = 1,
-                };
-                //Act
-                int testOwnerId = campaign.OwnerID;
+            //[Fact]
+            //public void CampaignOwnderId()
+            //{
+            //    //Arrange
+            //    Campaign campaign = new Campaign
+            //    {
+            //        OwnerID = 1,
+            //    };
+            //    //Act
+            //    int testOwnerId = campaign.OwnerID;
 
-                //Assert
-                Assert.Equal(testOwnerId, 1);
-            }
+            //    //Assert
+            //    Assert.Equal(testOwnerId, 1);
+            //}
 
-            [Fact]
-            public void UserHasName()
-            {
-                //Arrange
-                ApplicationUser user = new ApplicationUser
-                {
-                    UserName = "TestUser",
-                };
-                //Act
-                string testUser = user.UserName;
+            //[Fact]
+            //public void UserHasName()
+            //{
+            //    //Arrange
+            //    ApplicationUser user = new ApplicationUser
+            //    {
+            //        UserName = "TestUser",
+            //    };
+            //    //Act
+            //    string testUser = user.UserName;
 
-                //Assert
-                Assert.Equal(testUser, "TestUser");
-            }
-
-
-            [Fact]
-            public void StickerFireDbContent()
-            {
-                var options = new DbContextOptionsBuilder<StickerFireDbContext>()
-                    .UseInMemoryDatabase(databaseName: "getStatusCode")
-                    .Options;
-
-                using (var context = new StickerFireDbContext(options))
-                {
-                    var controller = new CampaignController(context);
-
-                    Campaign campaign = new Campaign();
-                    campaign.ID = 1;
-                    campaign.OwnerID = 1;
-                    campaign.Title = "Awesome Sauce Campaign";
-
-                    var result = controller.Create(campaign);
-
-                    var find = context.Campaign.FirstOrDefaultAsync(t => t.ID == campaign.ID);
-
-                    int number = context.Campaign.Local.Count;
-
-                    Assert.Equal(1, number);
-                }
-            }
-
-            [Fact]
-            public void StickerFireDbStatus()
-            {
-                var options = new DbContextOptionsBuilder<StickerFireDbContext>()
-                    .UseInMemoryDatabase(databaseName: "getStatusCode")
-                    .Options;
-
-                using (var context = new StickerFireDbContext(options))
-                {
-                    var controller = new CampaignController(context);
-
-                    Campaign campaign = new Campaign();
-                    campaign.ID = 1;
-                    campaign.OwnerID = 1;
-                    campaign.Title = "Awesome Sauce Campaign";
-
-                    var result = controller.Create(campaign);
-
-                    CreatedAtActionResult Caar = (CreatedAtActionResult)result.Result;
-
-                    Assert.StrictEqual(HttpStatusCode.Created, (HttpStatusCode)Caar.StatusCode.Value);
+            //    //Assert
+            //    Assert.Equal(testUser, "TestUser");
+            //}
 
 
-                }
-            }
+            //[Fact]
+            //public void StickerFireDbContent()
+            //{
+            //    var options = new DbContextOptionsBuilder<StickerFireDbContext>()
+            //        .UseInMemoryDatabase(databaseName: "getStatusCode")
+            //        .Options;
+
+            //    using (var context = new StickerFireDbContext(options))
+            //    {
+            //        var controller = new CampaignController(context);
+
+            //        Campaign campaign = new Campaign();
+            //        campaign.ID = 1;
+            //        campaign.OwnerID = 1;
+            //        campaign.Title = "Awesome Sauce Campaign";
+
+            //        var result = controller.Create(campaign);
+
+            //        var find = context.Campaign.FirstOrDefaultAsync(t => t.ID == campaign.ID);
+
+            //        int number = context.Campaign.Local.Count;
+
+            //        Assert.Equal(1, number);
+            //    }
+            //}
+
+            //[Fact]
+            //public void StickerFireDbStatus()
+            //{
+            //    var options = new DbContextOptionsBuilder<StickerFireDbContext>()
+            //        .UseInMemoryDatabase(databaseName: "getStatusCode")
+            //        .Options;
+
+            //    using (var context = new StickerFireDbContext(options))
+            //    {
+            //        var controller = new CampaignController(context);
+
+            //        Campaign campaign = new Campaign();
+            //        campaign.ID = 1;
+            //        campaign.OwnerID = 1;
+            //        campaign.Title = "Awesome Sauce Campaign";
+
+            //        var result = controller.Create(campaign);
+
+            //        CreatedAtActionResult Caar = (CreatedAtActionResult)result.Result;
+
+            //        Assert.StrictEqual(HttpStatusCode.Created, (HttpStatusCode)Caar.StatusCode.Value);
+
+
+            //    }
+            //}
 
 
         }
