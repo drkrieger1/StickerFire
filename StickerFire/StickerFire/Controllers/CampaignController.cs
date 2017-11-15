@@ -58,7 +58,7 @@ namespace StickerFire.Controllers
         //Post method to bind the entered campaign information into the database with AntiForgery Token
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,OwnerID,Votes,Views,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign)
+        public async Task<IActionResult> Create([Bind("ID,OwnerID,Votes,Views,Title,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign)
         {
             string userEmail = HttpContext.User.Identity.Name;
 
@@ -66,14 +66,17 @@ namespace StickerFire.Controllers
 
             if (ModelState.IsValid)
             {
-               // Blob.ConnectToContainer(userId);
+                var title = campaign.Title;
+                var path = campaign.ImgPath;
+
+                await Blob.MakeAContainer(user.Id);
+                await Blob.UploadBlob(user.Id, title, path);
+
+
                 _Context.Add(campaign);
                 await _Context.SaveChangesAsync();
-                await Blob.MakeAContainer(user.Id);
-                await Blob.UploadBlob(user.Id);
-                //return RedirectToAction(nameof(Index));
-
-                return CreatedAtAction("Create", new { id = campaign.ID }, campaign);
+                //return CreatedAtAction("Create", new { id = campaign.ID }, campaign);
+            return RedirectToAction(nameof(Index));
             }
 
             //return View(campaign);
