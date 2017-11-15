@@ -11,7 +11,7 @@ namespace StickerFire.Models
     {
         public int ID { get; set; }
 
-        public int OwnerID { get; set; }
+        public string OwnerID { get; set; }
 
         [Range(0, Int32.MaxValue)]
         public int Votes { get; set; }
