@@ -19,7 +19,6 @@ namespace StickerFire.Models
         [Range(0, Int32.MaxValue)]
         public int Views { get; set; }
 
-        [RegularExpression(@"^\S*$", ErrorMessage = "No white space!")]
         [Required]
         public string Title { get; set; }
 

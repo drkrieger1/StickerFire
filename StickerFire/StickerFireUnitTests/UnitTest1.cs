@@ -10,8 +10,47 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace StickerFireUnitTests
 {
-    public class UnitTest1 : IdentityUser
+    public class Tests
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private UserDbContext _context;
+
+
+        public Tests(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signInManager, UserDbContext context)
+        {
+            _userManager = usermanager;
+            _signInManager = signInManager;
+            _context = context;
+        }
+
+
+        [Fact]
+        public void UserDbContent()
+        {
+            var options = new DbContextOptionsBuilder<UserDbContext>()
+                .UseInMemoryDatabase(databaseName: "getStatusCode")
+                .Options;
+
+            using (var context = new UserDbContext(options))
+            {
+                var controller = new UserController(context);
+
+                ApplicationUser user = new ApplicationUser();
+                user.Email = "test@email.com";
+                user.UserName = "TestUserName";
+
+                var result = controller.User.ToString();
+
+                var find = context.ApplicationUser.FirstOrDefaultAsync(t => t.UserName == user.UserName);
+
+                int number = context.ApplicationUser.Local.Count;
+
+
+
+                Assert.Equal(1, number);
+            }
+        }
 
 
         [Fact]
@@ -223,6 +262,60 @@ namespace StickerFireUnitTests
             //Assert
             Assert.Equal(testUser, "TestUser");
         }
+
+
+        //[Fact]
+        //public void StickerFireDbContent()
+        //{
+        //    var options = new DbContextOptionsBuilder<StickerFireDbContext>()
+        //        .UseInMemoryDatabase(databaseName: "getStatusCode")
+        //        .Options;
+
+        //    using (var context = new StickerFireDbContext(options))
+        //    {
+        //        var controller = new CampaignController(_userManager, context);
+
+        //        Campaign campaign = new Campaign();
+        //        campaign.ID = 1;
+        //        campaign.OwnerID = "1";
+        //        campaign.Title = "Awesome Sauce Campaign";
+
+        //        var result = controller.Create(campaign);
+
+        //        var find = context.Campaign.FirstOrDefaultAsync(t => t.ID == campaign.ID);
+
+        //        int number = context.Campaign.Local.Count;
+
+        //        Assert.Equal(1, number);
+        //    }
+        //}
+
+        //[Fact]
+        //public void StickerFireDbStatus()
+        //{
+        //    var options = new DbContextOptionsBuilder<StickerFireDbContext>()
+        //        .UseInMemoryDatabase(databaseName: "getStatusCode")
+        //        .Options;
+
+        //    using (var context = new StickerFireDbContext(options))
+        //    {
+        //        var controller = new CampaignController(_userManager,context);
+
+        //        Campaign campaign = new Campaign();
+        //        campaign.ID = 1;
+        //        campaign.OwnerID = "1";
+        //        campaign.Title = "Awesome Sauce Campaign";
+
+        //        var result = controller.Create(campaign);
+
+        //        CreatedAtActionResult Caar = (CreatedAtActionResult)result.Result;
+
+        //        Assert.StrictEqual(HttpStatusCode.Created, (HttpStatusCode)Caar.StatusCode.Value);
+
+
+        //    }
+        //}
+
 
 
     }
