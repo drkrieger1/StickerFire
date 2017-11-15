@@ -31,9 +31,7 @@ namespace StickerFire.Controllers
         //Index Gathering all campaigns from the Context
         public async Task<IActionResult> Index(Category? category, string searchString)
         {
-            //IQueryable<Category> categoryQuery = from cat in _Context.Campaign
-            //                              orderby cat.Category
-            //                              select cat.Category;
+          
             if (!String.IsNullOrEmpty(searchString))
             {
                 
@@ -44,12 +42,23 @@ namespace StickerFire.Controllers
             {
                 return View(await _Context.Campaign.Where(c => c.Category == category).ToListAsync());
             }
-            //List<Campaign> campaignAll = new List<Campaign>();
-            //campaignAll = await campaigns.ToListAsync();
 
             return View(await _Context.Campaign.ToListAsync());
             
         }
+        //MyCampaigns: This will navigate to the users campaign campaigns
+
+        public async Task<IActionResult> MyCampaigns()
+        {
+            string userEmail = HttpContext.User.Identity.Name;
+
+            ApplicationUser user = await _user.FindByEmailAsync(userEmail);
+
+            var myCampaigns = await _Context.Campaign.Where(c => c.OwnerID == user.Id).ToListAsync();
+
+            return View(myCampaigns);
+        }
+
         //Get the create View
         public IActionResult Create()
         {
