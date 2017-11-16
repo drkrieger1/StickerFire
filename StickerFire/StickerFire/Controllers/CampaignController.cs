@@ -91,6 +91,15 @@ namespace StickerFire.Controllers
             return View(myCampaigns);
         }
 
+        public async Task<IActionResult> Vote(int id)
+        {
+            Campaign myCampaigns = await _Context.Campaign.FirstOrDefaultAsync(c => c.ID == id);
+            myCampaigns.Votes++;
+            await Edit(myCampaigns.ID, myCampaigns);
+
+            return View("ViewCampaign", myCampaigns);
+        }
+
         //this gets the filepath from the user to pass to the blob
         [HttpPost("UploadFiles")]
         [ValidateAntiForgeryToken]

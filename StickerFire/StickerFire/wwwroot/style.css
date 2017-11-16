@@ -35,7 +35,6 @@ h3 {
 .img-responsive, .Sticker {
     display: block;
     width: auto;
-    height: 300px;
 }
 
 .campList {
@@ -59,8 +58,29 @@ h3 {
     background-color: #88c100;
 }
 
-.Sticker {
+.vote{
+    text-align:center;
+}
+
+.btn-lg {
+    border: 2px solid white;
+    background-color: #58cbe5;
+    width: 50%;
+    font-family: 'Bauhaus 93';
+    color: white;
+    margin-bottom: 10%;
+    margin-top: 10%;
+}
+
+    .btn-lg:hover {
+        background-color: #88c100;
+    }
+
+    .Sticker {
     filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white) drop-shadow(1px 1px 3px black);
+    margin-bottom: 2%;
+    display:inline-block;
+    width: 100%;
 }
 
 .previewImg {
