@@ -12,45 +12,6 @@ namespace StickerFireUnitTests
 {
     public class Tests
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private UserDbContext _context;
-
-
-        public Tests(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signInManager, UserDbContext context)
-        {
-            _userManager = usermanager;
-            _signInManager = signInManager;
-            _context = context;
-        }
-
-
-        [Fact]
-        public void UserDbContent()
-        {
-            var options = new DbContextOptionsBuilder<UserDbContext>()
-                .UseInMemoryDatabase(databaseName: "getStatusCode")
-                .Options;
-
-            using (var context = new UserDbContext(options))
-            {
-                var controller = new UserController(context);
-
-                ApplicationUser user = new ApplicationUser();
-                user.Email = "test@email.com";
-                user.UserName = "TestUserName";
-
-                var result = controller.User.ToString();
-
-                var find = context.ApplicationUser.FirstOrDefaultAsync(t => t.UserName == user.UserName);
-
-                int number = context.ApplicationUser.Local.Count;
-
-
-
-                Assert.Equal(1, number);
-            }
-        }
 
 
         [Fact]
@@ -262,6 +223,8 @@ namespace StickerFireUnitTests
             //Assert
             Assert.Equal(testUser, "TestUser");
         }
+
+
 
 
         //[Fact]
