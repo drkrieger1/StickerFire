@@ -89,6 +89,29 @@ namespace StickerFire.Controllers
             return View(myCampaigns);
         }
 
+        //this gets the filepath from the user to pass to the blob
+        [HttpPost("UploadFiles")]
+        [ValidateAntiForgeryToken]
+        public async Task<string> PostFile(List<IFormFile> files)
+        {
+            long size = files.Sum(f => f.Length);
+
+            // full path to file in temp location
+            var filePath = Path.GetTempFileName();
+
+            foreach (var formFile in files)
+            {
+                if (formFile.Length > 0)
+                {
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+                }
+            }
+            return filePath;
+        }
+
         //Get the create View
         public IActionResult Create()
         {
@@ -115,12 +138,13 @@ namespace StickerFire.Controllers
                 //await Blob.MakeAContainer(user.Id);
                 //await Blob.UploadBlob(user.Id, title, path);
 
+                campaign.ImgPath = Blob.GetBlobUrl(user.Id, campaign.Title);
+
                 //TODO: Overwrite ImgPath with URL on azure
 
                 //Save new campaign to DB
                 _Context.Add(campaign);
                 await _Context.SaveChangesAsync();
-                //return CreatedAtAction("Create", new { id = campaign.ID }, campaign);
             return RedirectToAction(nameof(Index));
             }
 

@@ -24,8 +24,8 @@
     <h2>Make a New Sticker Campaign</h2>
     <div class="row">
         <div class="col-md-4">
-            @*<form asp-action="Create" / original version>*@
-            <form asp-action="Create" runat="server" enctype="multipart/form-data">
+            <form method="post" asp-action="Create" enctype="multipart/form-data" asp-controller="Campaign">
+            @*<form asp-action="Create" runat="server" enctype="multipart/form-data">*@
                 @*New Verstion*@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -49,14 +49,14 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 
-                @*form for upload file / original version*@
+                @*form for upload file *@
                 <div class="form-group">
                     <div class="col-md-10">
                         <p>Upload one or more files using this form:</p>
-                        <input asp-for="ImgPath" value="ImgPath" type="file" name="ImgPath" />
+                        <input asp-for="ImgPath" value="files" type="file" name="ImgPath" />
                     </div>
                 </div>
-                    <div class="form-group"> //original button
+                    <div class="form-group"> 
                         <input type="submit" value="Create" class="btn btn-default" />
                     </div>
             </form>
