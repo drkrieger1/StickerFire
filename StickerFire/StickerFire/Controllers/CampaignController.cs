@@ -94,23 +94,17 @@ namespace StickerFire.Controllers
         //this gets the filepath from the user to pass to the blob
         [HttpPost("UploadFiles")]
         [ValidateAntiForgeryToken]
-        public async Task<string> PostFile(List<IFormFile> files)
+        public async Task<string> PostFile(IFormFile file)
         {
-            long size = files.Sum(f => f.Length);
 
             // full path to file in temp location
             var filePath = Path.GetTempFileName();
 
-            foreach (var formFile in files)
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                if (formFile.Length > 0)
-                {
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await formFile.CopyToAsync(stream);
-                    }
-                }
-            }
+                await file.CopyToAsync(stream);
+            }   
+
             return filePath;
         }
 
@@ -122,8 +116,9 @@ namespace StickerFire.Controllers
         //Post method to bind the entered campaign information into the database with AntiForgery Token
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,OwnerID,Votes,Views,Title,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign)
+        public async Task<IActionResult> Create([Bind("ID,OwnerID,Votes,Views,Title,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign, IFormFile file)
         {
+            var path = await PostFile(file);
             //Get current user
             string userEmail = HttpContext.User.Identity.Name;
             ApplicationUser user = await _user.FindByEmailAsync(userEmail);
@@ -135,10 +130,9 @@ namespace StickerFire.Controllers
                 campaign.Active = true;
 
                 //Upload to Azure
-                //var title = campaign.Title;
-                //var path = campaign.ImgPath;
-                //await Blob.MakeAContainer(user.Id);
-                //await Blob.UploadBlob(user.Id, title, path);
+                var title = campaign.Title;
+                await Blob.MakeAContainer(user.Id);
+                await Blob.UploadBlob(user.Id, title, path);
 
                 campaign.ImgPath = Blob.GetBlobUrl(user.Id, campaign.Title);
 
@@ -147,7 +141,7 @@ namespace StickerFire.Controllers
                 //Save new campaign to DB
                 _Context.Add(campaign);
                 await _Context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
 
             //return View(campaign);
@@ -158,7 +152,7 @@ namespace StickerFire.Controllers
 
 
         //This Method will find the selected campaing and render the page for editing
-        public async Task<IActionResult>Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             //Checks that campaign exists
             if (id == null)
@@ -193,7 +187,7 @@ namespace StickerFire.Controllers
                 await _Context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-                return View(campaign);
+            return View(campaign);
         }
 
         //Get Method that will grab the campaign selected for deletion
@@ -208,9 +202,9 @@ namespace StickerFire.Controllers
             //Get Selected to delete
             var campaign = await _Context.Campaign
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if(campaign == null)
+            if (campaign == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
             return View(campaign);
         }

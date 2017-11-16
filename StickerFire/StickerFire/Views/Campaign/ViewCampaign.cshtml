@@ -8,7 +8,7 @@
             <h1>@Html.DisplayFor(modelItem => Model.Title)</h1>
         </div>
         <div class="col-lg-12">
-            <img class="Sticker" src="~/images/@Model.ImgPath">
+            <img class="Sticker" src="@Model.ImgPath">
         </div>
         <div class="col-lg-12 stickerInfo">
             <p>Votes:@Html.DisplayFor(modelItem => Model.Votes) | Views:@Html.DisplayFor(modelItem => Model.Views)</p>
