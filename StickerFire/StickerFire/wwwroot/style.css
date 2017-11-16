@@ -1,4 +1,6 @@
 ﻿body {
+    background-image: url('images/graffiti-wall-op.jpg');
+    
 }
 
 
@@ -27,8 +29,10 @@
     height: 300px;
 }
 
-.campList{
-    margin-top: 2%;
+.campList {
+    margin-bottom: 2%;
+    background-color: white;
+    border-radius: 10px;
 }
 
 .stickerInfo {
