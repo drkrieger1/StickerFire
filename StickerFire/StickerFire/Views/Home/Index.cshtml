@@ -14,8 +14,9 @@
     h3 {
         text-align: center;
     }
-    .hero{
-        width:100%;
+
+    .hero {
+        width: 100%;
     }
 </style>
 
@@ -58,20 +59,41 @@
         <form asp-controller="Campaign" asp-action="Index">
             <button type="submit">Browse Campaigns</button>
         </form>
-
     </div>
-
-
 </div>
+
+
+
 <div class="container">
     <div class="row">
         <div class="col-xm-12 col-md-12 col-lg-12">
             <img class="hero" src="~/images/stickerFirepic.png" />
         </div>
-
     </div>
-
 </div>
+<div class="campaignButton">
+    @if (!User.Identities.Any(u => u.IsAuthenticated))
+    {
+
+        <form>
+            <a asp-controller="UserAuth" asp-action="Index" class="btn-lg">Create a Campaign!</a>
+        </form>
+
+    }
+    else
+    {
+        <form>
+            <a asp-controller="Campaign" asp-action="Create" class="btn-lg">Create a Campaign!</a>
+        </form>
+    }
+</div>
+
+
+
+
+
+
+
 
 
 
