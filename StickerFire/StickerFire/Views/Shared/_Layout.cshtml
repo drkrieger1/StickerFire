@@ -29,69 +29,91 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img id="NavLogo" src="~/images/Stickerfire Sticker.png"></a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        Categories
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        @{
-                            var allValues = (Category[])Enum.GetValues(typeof(Category));
-                            foreach (var item in allValues)
-                            {
-                                <li><a asp-controller="Campaign" asp-action="Index" asp-route-category="@item">@item</a></li>
-                            }
-                        }
-                    </ul>
-                </li>
             </ul>
-
-            <form asp-controller="Campaign" asp-action="Index" class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" name="searchString" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-
-            <ul class="nav navbar-nav navbar-right">
-                @if (!User.Identities.Any(u => u.IsAuthenticated))
-                {
-                    <li><a asp-controller="UserAuth" asp-action="Index"><span class="glyphicon glyphicon-user"></span> Login/Register</a></li>
-                }
-                else
-                {
-                    <li class="navbar-text">
-                        Hello @User.Identities.First(u => u.IsAuthenticated &&
-                  u.HasClaim(c => c.Type == ClaimTypes.Name)).FindFirst(ClaimTypes.Name).Value
-                    </li>
-                    <li><a asp-controller="Campaign" asp-action="MyCampaigns"><span class="glyphicon glyphicon-dashboard"></span> My Campaigns</a></li>
-
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
                     <li>
-                        <form asp-area="" asp-controller="UserAuth" asp-action="Logout" method="post">
-                            <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+                        <form asp-controller="Campaign" asp-action="Index" class="navbar-form navbar-left">
+                            <div class="form-group">
+                                <input type="text" name="searchString" class="form-control" placeholder="Search">              
+                            <button type="submit" class="btn btn-default">Submit</button>
+                            </div>
                         </form>
                     </li>
-                    @if (User.IsInRole("Admin"))
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Categories
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            @{
+                                var allValues = (Category[])Enum.GetValues(typeof(Category));
+                                foreach (var item in allValues)
+                                {
+                                    <li><a asp-controller="Campaign" asp-action="Index" asp-route-category="@item">@item</a></li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Manage
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-controller="Campaign" asp-action="MyCampaigns"><span class="glyphicon glyphicon-dashboard"></span> My Campaigns</a></li>
+                            <li><a asp-controller="Campaign" asp-action="Index"><span class="glyphicon glyphicon-dashboard"></span> All Campaigns</a></li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li>
+                                    <a asp-controller="User" asp-action="Index">
+                                        <span class="glyphicon glyphicon-user">
+                                        </span> Manage Users
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Campaign" asp-action="AdminIndex">
+                                        <span class="glyphicon glyphicon-user">
+                                        </span> Manage Campaigns
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (!User.Identities.Any(u => u.IsAuthenticated))
                     {
-                        <li>
-                            <a asp-controller="User" asp-action="Index">
-                                <span class="glyphicon glyphicon-user">
-                                </span> Manage Users
-                            </a>
-                        </li>
-                       
+                        <li><a asp-controller="UserAuth" asp-action="Index"><span class="glyphicon glyphicon-user"></span> Login/Register</a></li>
                     }
-                }
-            </ul>
+                    else
+                    {
+                        <li class="navbar-text">
+                            Hello @User.Identities.First(u => u.IsAuthenticated &&
+                  u.HasClaim(c => c.Type == ClaimTypes.Name)).FindFirst(ClaimTypes.Name).Value
+                        </li>
+                        <li>
+                            <form asp-area="" asp-controller="UserAuth" asp-action="Logout" method="post">
+                                <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+                            </form>
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
     </nav>
     <div>
         @RenderBody()
     </div>
-    <footer class=" col-lg-12 panel-footer" id="footer">
+    <footer class=" col-sx-12 col-md-l col-lg-12 panel-footer" id="footer">
             <div class="footer">&copy; 2017 - StickerFire <a asp-controller="Home" asp-action="About">Meet the Devs</a></div>
     </footer>
 </body>
