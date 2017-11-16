@@ -127,6 +127,7 @@ namespace StickerFire.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,OwnerID,Votes,Views,Title,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign, IFormFile file)
         {
+
             var path = await PostFile(file);
             //Get current user
             string userEmail = HttpContext.User.Identity.Name;
