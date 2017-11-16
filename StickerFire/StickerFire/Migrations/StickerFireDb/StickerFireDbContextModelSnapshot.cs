@@ -9,7 +9,7 @@ using StickerFire.Data;
 using StickerFire.Models;
 using System;
 
-namespace StickerFire.Migrations
+namespace StickerFire.Migrations.StickerFireDb
 {
     [DbContext(typeof(StickerFireDbContext))]
     partial class StickerFireDbContextModelSnapshot : ModelSnapshot

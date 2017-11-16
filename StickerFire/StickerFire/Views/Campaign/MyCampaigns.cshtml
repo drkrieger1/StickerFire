@@ -7,7 +7,60 @@
 
 <div class="container">
     <div class="row">
+        <h1>My Active Campaigns</h1>
+        <hr />
 
+        @{
+            foreach (var item in Model)
+            {
+                if (item.Active == true)
+                {
+                    <div class="col-lg-12 campList">
+                        @if (item.ImgPath != null)
+                    {
+                            <a asp-controller="Campaign" asp-action="ViewCampaign" asp-route-id="@item.ID"><img src="@item.ImgPath" class="img-responsive previewImg" /></a>
+                        }
+                        else
+                        { <img src="https://stickerfireblob.blob.core.windows.net/f98ff485-0847-4d44-8bb1-f39bb0933f92container/scoop" />}
+                        <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+                        <p>Status: @Html.DisplayFor(modelItem => item.Status)</p>
+                        <p>Published: @Html.DisplayFor(modelItem => item.Published)</p>
+                        <p>Votes:@Html.DisplayFor(modelItem => item.Votes) | Views:@Html.DisplayFor(modelItem => item.Views)</p>
+                    </div>
+                }
+
+            }
+        }
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="row">
+        <h1>My Past Campaigns</h1>
+        <hr />
+        @{
+            foreach (var item in Model)
+            {
+                if (item.Active == false)
+                {
+                    <div class="col-lg-12 campList">
+                        @if (item.ImgPath != null)
+                        {
+                            <a asp-controller="Campaign" asp-action="ViewCampaign" asp-route-id="@item.ID"><img src="@item.ImgPath" class="img-responsive previewImg" /></a>
+                        }
+                        else
+                        {
+
+                            <img src="https://stickerfireblob.blob.core.windows.net/f98ff485-0847-4d44-8bb1-f39bb0933f92container/scoop" />
+                        }
+                        <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+                        <p>Votes:@Html.DisplayFor(modelItem => item.Votes) | Views:@Html.DisplayFor(modelItem => item.Views)</p>
+                    </div>
+                }
+
+            }
+        }
     </div>
 
 </div>

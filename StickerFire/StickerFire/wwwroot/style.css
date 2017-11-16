@@ -1,4 +1,73 @@
 ﻿body {
+    background-image: url('images/graffiti-wall-op.jpg');
+    
+}
+
+hr {
+    border: 1px solid black;
+    border-color:black;
+    color:black;
+}
+
+h3 {
+    font-family: 'Bauhaus 93';
+}
+
+.stickerHeading {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-image: url('images/graffiti-wall.jpg');
+    background-size: cover;
+    text-align: center;
+    border: 5px solid white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 0 black;
+    font-family: 'Bauhaus 93';
+    color: #88c100;
+}
+
+    .stickerHeading h1 {
+        font-size: 5em;
+        text-shadow: 5px 5px 0 white, -5px 5px 0 white, 5px -5px 0 white, -5px -5px 0 white;
+    }
+
+
+.img-responsive, .Sticker {
+    display: block;
+    width: auto;
+    height: 300px;
+}
+
+.campList {
+    margin-bottom: 2%;
+    background-color: #e9eaec;
+    border-radius: 10px;
+    filter: drop-shadow(1px 1px 1px black);
+}
+
+.stickerInfo {
+    margin-top: 5%;
+}
+
+
+.progress {
+    height: 30px;
+    filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white) drop-shadow(1px 1px 3px black);
+}
+.progress-bar {
+    border:2px solid white;
+    background-color: #88c100;
+}
+
+.Sticker {
+    filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white) drop-shadow(1px 1px 3px black);
+}
+
+.previewImg {
+    margin-right: 5%;
+    float: left;
+    height: 100px;
+    filter: drop-shadow(2px 2px 0 white) drop-shadow(-2px 2px 0 white) drop-shadow(2px -2px 0 white) drop-shadow(-2px -2px 0 white) drop-shadow(1px 1px 2px black);
 }
 
 .navbar-brand {
@@ -6,5 +75,5 @@
 }
 
 #NavLogo {
-    height:40px;
+    height: 40px;
 }
