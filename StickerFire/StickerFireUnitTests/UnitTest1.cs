@@ -7,12 +7,20 @@ using System.Net;
 using Xunit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace StickerFireUnitTests
 {
     public class Tests
     {
         private readonly UserManager<ApplicationUser> userManager;
+        private IFormFile file;
+        private SignInManager<ApplicationUser> signInManager;
+        private readonly ILogger<UserAuthController> logger;
+        private MegaViewModel rvm;
+        private MegaViewModel lvm;
 
         [Fact]
         public void UserNameIsValid()
@@ -279,7 +287,7 @@ namespace StickerFireUnitTests
         }
 
         [Fact]
-        public void FileUploadControlleTestUploadView()
+        public void FileUploadControllerTestUploadView()
         {
             var file = new FileUploadController();
 
@@ -289,20 +297,41 @@ namespace StickerFireUnitTests
 
         }
 
-        [Theory]
-        public void CampaignTestView()
+        [Fact]
+        public void CampaignDbContextEqualId()
         {
             var options = new DbContextOptionsBuilder<StickerFireDbContext>()
                 .UseInMemoryDatabase(databaseName: "getStatusCode")
                 .Options;
 
-            using ( var context = new StickerFireDbContext(options))
+            using (var context = new StickerFireDbContext(options))
             {
-            var campaign = new CampaignController(userManager, context);
+                CampaignController c = new CampaignController(userManager, context);
 
-                var result = campaign.Create();
+
+                Campaign campaign = new Campaign();
+                campaign.ID = 1;
+                campaign.OwnerID = "1";
+                campaign.Title = "Awesome Sauce Campaign";
+
+                var result = c.Create(campaign, file);
+
+
+                Assert.Equal(campaign.ID, result.Id);
+
 
             }
         }
+
+        [Fact]
+        public void UserAuthAdminRegisterViewResult()
+        {
+            UserAuthController user = new UserAuthController(userManager, signInManager, logger);
+
+            var result = user.RegisterAdmin();
+
+            Assert.IsType<ViewResult>(result);
+        }
+
     }
 }
