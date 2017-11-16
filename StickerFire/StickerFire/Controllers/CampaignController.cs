@@ -13,8 +13,6 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using System.IO;
 
 namespace StickerFire.Controllers
 {
@@ -81,7 +79,6 @@ namespace StickerFire.Controllers
             return View(myCampaigns);
         }
 
-        [AllowAnonymous]
         //View single campaign
         public async Task<IActionResult> ViewCampaign(int id)
         {
@@ -91,6 +88,7 @@ namespace StickerFire.Controllers
 
             return View(myCampaigns);
         }
+
         //this gets the filepath from the user to pass to the blob
         [HttpPost("UploadFiles")]
         [ValidateAntiForgeryToken]
@@ -122,9 +120,8 @@ namespace StickerFire.Controllers
         //Post method to bind the entered campaign information into the database with AntiForgery Token
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,OwnerID,Votes,Views,Title,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign, List<IFormFile> files)
+        public async Task<IActionResult> Create([Bind("ID,OwnerID,Votes,Views,Title,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign)
         {
-            var path = await PostFile(files);
             //Get current user
             string userEmail = HttpContext.User.Identity.Name;
             ApplicationUser user = await _user.FindByEmailAsync(userEmail);
@@ -136,9 +133,10 @@ namespace StickerFire.Controllers
                 campaign.Active = true;
 
                 //Upload to Azure
-                var title = campaign.Title;
-                await Blob.MakeAContainer(user.Id);
-                await Blob.UploadBlob(user.Id, title, path);
+                //var title = campaign.Title;
+                //var path = campaign.ImgPath;
+                //await Blob.MakeAContainer(user.Id);
+                //await Blob.UploadBlob(user.Id, title, path);
 
                 campaign.ImgPath = Blob.GetBlobUrl(user.Id, campaign.Title);
 

@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using StickerFire.Data;
 using System;
 
-namespace StickerFire.Migrations.UserDb
+namespace StickerFire.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20171115210347_User")]
-    partial class User
+    partial class UserDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
