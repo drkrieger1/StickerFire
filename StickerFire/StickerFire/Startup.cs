@@ -53,13 +53,7 @@ namespace StickerFire
             //Enable Identity Functionality using ApplicationUser model
             services.AddIdentity<ApplicationUser, IdentityRole>()
                    .AddEntityFrameworkStores<UserDbContext>()
-                   .AddDefaultTokenProviders();            
-            //Enabel OAuth for Google+
-            services.AddAuthentication().AddGoogle(googleOptions =>
-            {
-                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-            });
+                   .AddDefaultTokenProviders();
             //This context is for campaign database model
             services.AddDbContext<StickerFireDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("StickerFireContext")));
