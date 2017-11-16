@@ -27,12 +27,23 @@
     height: 300px;
 }
 
+.campList{
+    margin-top: 2%;
+}
+
 .stickerInfo {
     margin-top: 5%;
 }
 
 .Sticker {
     filter: drop-shadow(5px 5px 0 white) drop-shadow(-5px 5px 0 white) drop-shadow(5px -5px 0 white) drop-shadow(-5px -5px 0 white) drop-shadow(2px 1px 3px black);
+}
+
+.previewImg {
+    margin-right: 5%;
+    float: left;
+    height: 100px;
+    filter: drop-shadow(2px 2px 0 white) drop-shadow(-2px 2px 0 white) drop-shadow(2px -2px 0 white) drop-shadow(-2px -2px 0 white) drop-shadow(1px 1px 2px black);
 }
 
 .navbar-brand {

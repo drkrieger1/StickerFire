@@ -60,7 +60,6 @@
                 @if (!User.Identities.Any(u => u.IsAuthenticated))
                 {
                     <li><a asp-controller="UserAuth" asp-action="Index"><span class="glyphicon glyphicon-user"></span> Login/Register</a></li>
-
                 }
                 else
                 {
@@ -68,6 +67,8 @@
                         Hello @User.Identities.First(u => u.IsAuthenticated &&
                   u.HasClaim(c => c.Type == ClaimTypes.Name)).FindFirst(ClaimTypes.Name).Value
                     </li>
+                    <li><a asp-controller="Campaign" asp-action="MyCampaigns"><span class="glyphicon glyphicon-dashboard"></span> My Campaigns</a></li>
+
                     <li>
                         <form asp-area="" asp-controller="UserAuth" asp-action="Logout" method="post">
                             <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
