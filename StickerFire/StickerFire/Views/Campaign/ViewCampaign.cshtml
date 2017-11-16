@@ -10,9 +10,10 @@
         <div class="col-lg-12">
             <img class="Sticker" src="@Model.ImgPath">
         </div>
-        <div class="col-lg-12 stickerInfo">
+        <div class="col-lg-12 stickerInfo campList">
+            <h3>About this Sticker</h3>
+            <hr />
             <p>Votes:@Html.DisplayFor(modelItem => Model.Votes) | Views:@Html.DisplayFor(modelItem => Model.Views)</p>
-            <h3>About this Sticker:</h3>
             <p>@Html.DisplayFor(modelItem => Model.Description)</p>
         </div>
     </div>
