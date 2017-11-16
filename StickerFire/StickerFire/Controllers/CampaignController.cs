@@ -92,27 +92,26 @@ namespace StickerFire.Controllers
             return View(myCampaigns);
         }
         //this gets the filepath from the user to pass to the blob
-        [HttpPost("UploadFiles")]
-        [ValidateAntiForgeryToken]
-        public async Task<string> PostFile(List<IFormFile> files)
-        {
-            long size = files.Sum(f => f.Length);
+        //[HttpPost("UploadFiles")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<string> PostFile(List<IFormFile> files)
+        //{
+        //    long size = files.Sum(f => f.Length);
+        //    // full path to file in temp location
+        //    var filePath = Path.GetTempFileName();
 
-            // full path to file in temp location
-            var filePath = Path.GetTempFileName();
-
-            foreach (var formFile in files)
-            {
-                if (formFile.Length > 0)
-                {
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await formFile.CopyToAsync(stream);
-                    }
-                }
-            }
-            return filePath;
-        }
+        //    foreach (var formFile in files)
+        //    {
+        //        if (formFile.Length > 0)
+        //        {
+        //            using (var stream = new FileStream(filePath, FileMode.Create))
+        //            {
+        //                await formFile.CopyToAsync(stream);
+        //            }
+        //        }
+        //    }
+        //    return filePath;
+        //}
 
         //Get the create View
         public IActionResult Create()
@@ -124,7 +123,25 @@ namespace StickerFire.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,OwnerID,Votes,Views,Title,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign, List<IFormFile> files)
         {
-            var path = await PostFile(files);
+            //var path = await PostFile(files);
+            //public async Task<string> PostFile(List<IFormFile> files)
+            //{
+                long size = files.Sum(f => f.Length);
+                // full path to file in temp location
+                var filePath = Path.GetTempFileName();
+
+                foreach (var formFile in files)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await formFile.CopyToAsync(stream);
+                        }
+                    }
+                }
+                //return filePath;
+            //}
             //Get current user
             string userEmail = HttpContext.User.Identity.Name;
             ApplicationUser user = await _user.FindByEmailAsync(userEmail);
@@ -138,7 +155,7 @@ namespace StickerFire.Controllers
                 //Upload to Azure
                 var title = campaign.Title;
                 await Blob.MakeAContainer(user.Id);
-                await Blob.UploadBlob(user.Id, title, path);
+                await Blob.UploadBlob(user.Id, title, filePath);
 
                 campaign.ImgPath = Blob.GetBlobUrl(user.Id, campaign.Title);
 
