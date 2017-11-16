@@ -50,13 +50,25 @@ namespace StickerFire
             // This context is derived from IdentityDbContext. This context is responsible for the ASPNET Identity tables in the database. 
             services.AddDbContext<UserDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("StickerFireContext")));
-            //Enable Identity Functionality using ApplicationUser model
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                   .AddEntityFrameworkStores<UserDbContext>()
-                   .AddDefaultTokenProviders();
             //This context is for campaign database model
             services.AddDbContext<StickerFireDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("StickerFireContext")));
+            //Enable Identity Functionality using ApplicationUser model
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                   .AddEntityFrameworkStores<UserDbContext>()
+                   .AddDefaultTokenProviders();            
+            //Enabel OAuth for Google+
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            })
+            .AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

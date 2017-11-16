@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -55,6 +54,43 @@ namespace StickerFire.Controllers
             return RedirectToAction("Index", "UserAuth");
         }
 
+        //External Registration -- OAuth
+        public IActionResult ExternalLogin(string provider, string returnURL = null)
+        {
+            var redirectURL = Url.Action(nameof(ExternalLoginCallback), "Account", new { returnURL });
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectURL);
+            return Challenge(properties, provider);
+        }
+        public async Task<IActionResult> ExternalLoginCallback(string returnURL = null, string remoteError = null)
+        {
+            if (remoteError != null)
+            {
+                return RedirectToAction(nameof(Login));
+            }
+
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+
+            if (info == null)
+            {
+                return RedirectToAction(nameof(Login));
+            }
+
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (result.IsLockedOut)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                return View("ExternalLogin", new ExternalLoginModel { Email = email });
+            }
+        }
 
         //Admin Registration form
         [Authorize(Policy = "Admin Only")]
@@ -64,6 +100,7 @@ namespace StickerFire.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
+
 
         //Register Admin user
         [Authorize(Policy = "Admin Only")]
