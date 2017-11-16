@@ -5,14 +5,6 @@
 
     Layout = "_Layout";
 }
-
-    @*@{
-        var allValues = (Category[])Enum.GetValues(typeof(Category));
-        foreach (var item in allValues)
-        {
-            <li><a asp-controller="Campaign" asp-action="Index" asp-route-category="@item">@item</a></li>
-        }
-    }*@
 <div class="container">
     <h4>Campaign</h4>
     <hr />
@@ -21,7 +13,17 @@
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="ID" />
-                <div class="form-group">
+                    <input asp-for="OwnerID" class="form-control" type="hidden" />
+                
+                    <input asp-for="ImgPath" class="form-control" type="hidden" />
+                
+                    <input asp-for="Views" class="form-control" type="hidden" />
+                   
+                    <input asp-for="Votes" class="form-control" type="hidden" />
+                  
+
+
+                 <div class="form-group">
                     <label asp-for="Title" class="control-label"></label>
                     <input asp-for="Title" class="form-control" />
                     <span asp-validation-for="Title" class="text-danger"></span>

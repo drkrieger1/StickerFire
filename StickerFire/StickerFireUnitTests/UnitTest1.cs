@@ -7,51 +7,20 @@ using System.Net;
 using Xunit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace StickerFireUnitTests
 {
     public class Tests
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private UserDbContext _context;
-
-
-        public Tests(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signInManager, UserDbContext context)
-        {
-            _userManager = usermanager;
-            _signInManager = signInManager;
-            _context = context;
-        }
-
-
-        [Fact]
-        public void UserDbContent()
-        {
-            var options = new DbContextOptionsBuilder<UserDbContext>()
-                .UseInMemoryDatabase(databaseName: "getStatusCode")
-                .Options;
-
-            using (var context = new UserDbContext(options))
-            {
-                var controller = new UserController(context);
-
-                ApplicationUser user = new ApplicationUser();
-                user.Email = "test@email.com";
-                user.UserName = "TestUserName";
-
-                var result = controller.User.ToString();
-
-                var find = context.ApplicationUser.FirstOrDefaultAsync(t => t.UserName == user.UserName);
-
-                int number = context.ApplicationUser.Local.Count;
-
-
-
-                Assert.Equal(1, number);
-            }
-        }
-
+        private readonly UserManager<ApplicationUser> userManager;
+        private IFormFile file;
+        private SignInManager<ApplicationUser> signInManager;
+        private readonly ILogger<UserAuthController> logger;
+        private MegaViewModel rvm;
+        private MegaViewModel lvm;
 
         [Fact]
         public void UserNameIsValid()
@@ -263,60 +232,106 @@ namespace StickerFireUnitTests
             Assert.Equal(testUser, "TestUser");
         }
 
+        [Fact]
+        public void RegisterLoginEmailsMatch()
+        {
+            RegisterViewModel register = new RegisterViewModel
+            {
+                Email = "test@email.com"
+            };
 
-        //[Fact]
-        //public void StickerFireDbContent()
-        //{
-        //    var options = new DbContextOptionsBuilder<StickerFireDbContext>()
-        //        .UseInMemoryDatabase(databaseName: "getStatusCode")
-        //        .Options;
+            LoginViewModel login = new LoginViewModel
+            {
+                Email = "test@email.com"
+            };
 
-        //    using (var context = new StickerFireDbContext(options))
-        //    {
-        //        var controller = new CampaignController(_userManager, context);
+            Assert.Equal(register.Email, login.Email);
+        }
 
-        //        Campaign campaign = new Campaign();
-        //        campaign.ID = 1;
-        //        campaign.OwnerID = "1";
-        //        campaign.Title = "Awesome Sauce Campaign";
+        [Fact]
+        public void RegisterLoginPasswordsMatch()
+        {
+            RegisterViewModel register = new RegisterViewModel
+            {
+                Password = "12345"
+            };
 
-        //        var result = controller.Create(campaign);
+            LoginViewModel login = new LoginViewModel
+            {
+                Password = "12345"
+            };
 
-        //        var find = context.Campaign.FirstOrDefaultAsync(t => t.ID == campaign.ID);
+            Assert.Equal(register.Password, login.Password);
+        }
 
-        //        int number = context.Campaign.Local.Count;
+        [Fact]
+        public void HomeIndexResultView()
+        {
 
-        //        Assert.Equal(1, number);
-        //    }
-        //}
+            HomeController home = new HomeController();
 
-        //[Fact]
-        //public void StickerFireDbStatus()
-        //{
-        //    var options = new DbContextOptionsBuilder<StickerFireDbContext>()
-        //        .UseInMemoryDatabase(databaseName: "getStatusCode")
-        //        .Options;
+            IActionResult result = home.Index();
 
-        //    using (var context = new StickerFireDbContext(options))
-        //    {
-        //        var controller = new CampaignController(_userManager,context);
+            Assert.IsType<ViewResult>(result);
+        }
 
-        //        Campaign campaign = new Campaign();
-        //        campaign.ID = 1;
-        //        campaign.OwnerID = "1";
-        //        campaign.Title = "Awesome Sauce Campaign";
+        [Fact]
+        public void HomeAboutResultView()
+        {
 
-        //        var result = controller.Create(campaign);
+            HomeController home = new HomeController();
 
-        //        CreatedAtActionResult Caar = (CreatedAtActionResult)result.Result;
+            IActionResult result = home.About();
 
-        //        Assert.StrictEqual(HttpStatusCode.Created, (HttpStatusCode)Caar.StatusCode.Value);
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public void FileUploadControllerTestUploadView()
+        {
+            var file = new FileUploadController();
+
+            IActionResult result = file.TestUpload();
+
+            Assert.IsType<ViewResult>(result);
+
+        }
+
+        [Fact]
+        public void CampaignDbContextEqualId()
+        {
+            var options = new DbContextOptionsBuilder<StickerFireDbContext>()
+                .UseInMemoryDatabase(databaseName: "getStatusCode")
+                .Options;
+
+            using (var context = new StickerFireDbContext(options))
+            {
+                CampaignController c = new CampaignController(userManager, context);
 
 
-        //    }
-        //}
+                Campaign campaign = new Campaign();
+                campaign.ID = 1;
+                campaign.OwnerID = "1";
+                campaign.Title = "Awesome Sauce Campaign";
+
+                var result = c.Create(campaign, file);
 
 
+                Assert.Equal(campaign.ID, result.Id);
+
+
+            }
+        }
+
+        [Fact]
+        public void UserAuthAdminRegisterViewResult()
+        {
+            UserAuthController user = new UserAuthController(userManager, signInManager, logger);
+
+            var result = user.RegisterAdmin();
+
+            Assert.IsType<ViewResult>(result);
+        }
 
     }
 }

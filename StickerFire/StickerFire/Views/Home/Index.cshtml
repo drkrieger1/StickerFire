@@ -14,6 +14,9 @@
     h3 {
         text-align: center;
     }
+    .hero{
+        width:100%;
+    }
 </style>
 
 <div id="myCarousel" class="carousel slide">
@@ -53,7 +56,7 @@
 <div>
     <div class="campaignButton">
         <form asp-controller="Campaign" asp-action="Index">
-            <button type="submit">All Active Campaigns</button>
+            <button type="submit">Browse Campaigns</button>
         </form>
 
     </div>
@@ -63,7 +66,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xm-12 col-md-12 col-lg-12">
-            <img src="~/images/stickerFirepic.png" />
+            <img class="hero" src="~/images/stickerFirepic.png" />
         </div>
 
     </div>

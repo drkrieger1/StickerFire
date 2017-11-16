@@ -80,7 +80,7 @@ namespace StickerFire.Controllers
 
             return View(myCampaigns);
         }
-
+        [AllowAnonymous]
         //View single campaign
         public async Task<IActionResult> ViewCampaign(int id)
         {
@@ -89,6 +89,15 @@ namespace StickerFire.Controllers
             await Edit(myCampaigns.ID, myCampaigns);
 
             return View(myCampaigns);
+        }
+
+        public async Task<IActionResult> Vote(int id)
+        {
+            Campaign myCampaigns = await _Context.Campaign.FirstOrDefaultAsync(c => c.ID == id);
+            myCampaigns.Votes++;
+            await Edit(myCampaigns.ID, myCampaigns);
+
+            return View("ViewCampaign", myCampaigns);
         }
 
         //this gets the filepath from the user to pass to the blob
@@ -118,7 +127,6 @@ namespace StickerFire.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,OwnerID,Votes,Views,Title,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign, IFormFile file)
         {
-
             var path = await PostFile(file);
             //Get current user
             string userEmail = HttpContext.User.Identity.Name;
