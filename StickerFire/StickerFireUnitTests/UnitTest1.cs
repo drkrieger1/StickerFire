@@ -12,7 +12,7 @@ namespace StickerFireUnitTests
 {
     public class Tests
     {
-
+        private readonly UserManager<ApplicationUser> userManager;
 
         [Fact]
         public void UserNameIsValid()
@@ -289,5 +289,20 @@ namespace StickerFireUnitTests
 
         }
 
+        [Theory]
+        public void CampaignTestView()
+        {
+            var options = new DbContextOptionsBuilder<StickerFireDbContext>()
+                .UseInMemoryDatabase(databaseName: "getStatusCode")
+                .Options;
+
+            using ( var context = new StickerFireDbContext(options))
+            {
+            var campaign = new CampaignController(userManager, context);
+
+                var result = campaign.Create();
+
+            }
+        }
     }
 }
