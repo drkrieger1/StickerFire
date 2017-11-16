@@ -10,13 +10,29 @@
         <div class="col-lg-12">
             <img class="Sticker" src="@Model.ImgPath">
         </div>
+        <div class="container">
+            @if(Model.Votes < 25)
+            {
+            <h3>Goal Progress</h3>
+            }
+            else
+            {
+                <h3>Goal Reached!</h3>
+            }
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="@Model.Votes" aria-valuemin="0" aria-valuemax="" style="width:@(Model.Votes*4)%">
+                    <span class="sr-only">70% Complete</span>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-12 stickerInfo campList">
             <h3>About this Sticker</h3>
             <hr />
             <p>Votes:@Html.DisplayFor(modelItem => Model.Votes) | Views:@Html.DisplayFor(modelItem => Model.Views)</p>
-            <p>@Html.DisplayFor(modelItem => Model.Description)</p>
+            <h4>@Html.DisplayFor(modelItem => Model.Description)</h4>
         </div>
     </div>
 </div>
+        
 
 
