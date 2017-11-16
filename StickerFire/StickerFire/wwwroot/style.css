@@ -3,6 +3,15 @@
     
 }
 
+hr {
+    border: 1px solid black;
+    border-color:black;
+    color:black;
+}
+
+h3 {
+    font-family: 'Bauhaus 93';
+}
 
 .stickerHeading {
     margin-top: 5%;
@@ -19,7 +28,7 @@
 
     .stickerHeading h1 {
         font-size: 5em;
-        text-shadow: 5px 5px 0 white, -5px 5px 0 white, 5px -5px 0 white, -5px -5px 0 white, 2px 1px 3px black;
+        text-shadow: 5px 5px 0 white, -5px 5px 0 white, 5px -5px 0 white, -5px -5px 0 white;
     }
 
 
@@ -31,8 +40,9 @@
 
 .campList {
     margin-bottom: 2%;
-    background-color: white;
+    background-color: #e9eaec;
     border-radius: 10px;
+    filter: drop-shadow(1px 1px 1px black);
 }
 
 .stickerInfo {
@@ -40,7 +50,7 @@
 }
 
 .Sticker {
-    filter: drop-shadow(5px 5px 0 white) drop-shadow(-5px 5px 0 white) drop-shadow(5px -5px 0 white) drop-shadow(-5px -5px 0 white) drop-shadow(2px 1px 3px black);
+    filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white) drop-shadow(1px 1px 3px black);
 }
 
 .previewImg {
