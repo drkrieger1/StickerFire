@@ -1,4 +1,4 @@
-﻿.
+﻿
 @model IEnumerable<StickerFire.Models.Campaign>
 @using StickerFire.Models;
 @{
@@ -18,7 +18,7 @@
                 <div class="col-lg-2">
                     @if (item.ImgPath != null)
                     {
-                        <a asp-controller="Campaign" asp-action="ViewCampaign" asp-route-id="@item.ID"><img src="~/images/@item.ImgPath" /></a>
+                        <img src="~/images/@item.ImgPath" />
                     }
                     else
                     { <img src="http://via.placeholder.com/140x150" />}

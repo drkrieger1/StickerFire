@@ -12,14 +12,14 @@ using System;
 namespace StickerFire.Migrations.StickerFireDb
 {
     [DbContext(typeof(StickerFireDbContext))]
-    [Migration("20171115180437_Campaign3")]
-    partial class Campaign3
+    [Migration("20171116002948_stickerFire")]
+    partial class stickerFire
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("StickerFire.Models.Campaign", b =>
@@ -47,7 +47,8 @@ namespace StickerFire.Migrations.StickerFireDb
 
                     b.Property<int>("Status");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.Property<int>("Views");
 
