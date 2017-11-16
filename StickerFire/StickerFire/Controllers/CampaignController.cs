@@ -13,6 +13,8 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace StickerFire.Controllers
 {

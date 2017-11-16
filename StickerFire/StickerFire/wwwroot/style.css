@@ -1,10 +1,47 @@
 ﻿body {
 }
 
+.container {
+    height: 600px;
+}
+
+.stickerHeading {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-image: url('images/graffiti-wall.jpg');
+    background-size: cover;
+    text-align: center;
+    border: 5px solid white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 0 black;
+    font-family: 'Bauhaus 93';
+    color: #88c100;
+}
+
+    .stickerHeading h1 {
+        font-size: 5em;
+        text-shadow: 5px 5px 0 white, -5px 5px 0 white, 5px -5px 0 white, -5px -5px 0 white, 2px 1px 3px black;
+    }
+
+
+.img-responsive, .Sticker {
+    display: block;
+    width: auto;
+    height: 300px;
+}
+
+.stickerInfo {
+    margin-top: 5%;
+}
+
+.Sticker {
+    filter: drop-shadow(5px 5px 0 white) drop-shadow(-5px 5px 0 white) drop-shadow(5px -5px 0 white) drop-shadow(-5px -5px 0 white) drop-shadow(2px 1px 3px black);
+}
+
 .navbar-brand {
     padding: 5px 15px;
 }
 
 #NavLogo {
-    height:40px;
+    height: 40px;
 }
