@@ -80,7 +80,7 @@ namespace StickerFire.Controllers
 
             return View(myCampaigns);
         }
-
+        [AllowAnonymous]
         //View single campaign
         public async Task<IActionResult> ViewCampaign(int id)
         {
