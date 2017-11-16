@@ -76,27 +76,12 @@ h3 {
         background-color: #88c100;
     }
 
-button {
-    border: 2px solid white;
-    background-color: #58cbe5;
-    font-family: 'Bauhaus 93';
-    color: white;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
-}
-
-    button:hover {
-        background-color: #88c100;
-    }
-    
     .Sticker {
-        filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white) drop-shadow(1px 1px 3px black);
-        margin-bottom: 2%;
-        display: inline-block;
-        width: 100%;
-    }
+    filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white) drop-shadow(1px 1px 3px black);
+    margin-bottom: 2%;
+    display:inline-block;
+    width: 100%;
+}
 
 .previewImg {
     margin-right: 5%;
