@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace StickerFire.Models
 {
@@ -18,9 +19,8 @@ namespace StickerFire.Models
             try
             {
                 storageAccount = new CloudStorageAccount(
-             new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
-             "stickerfireblob",
-             "/uQU92fEI5O3MetZ6Mc+Yvi4Y2g14RfFuIUib8a7p/3AxT1fTFA5S8/+QaWbZhtslQM+tOZMz2sF6udHXElACQ=="), true);
+             new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials("blobname", "blobstring"), true);
+                
             }
             catch (StorageException e)
             {
@@ -41,15 +41,6 @@ namespace StickerFire.Models
             await container.CreateIfNotExistsAsync();
         }
 
-        public static void GetABlob(string id, string name)
-        {
-            var container = ConnectToContainer(id);
-
-            // Get a reference to a blob of a specific name.
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(name);
-
-        }
-
         public static async Task UploadBlob(string id, string title, string path)
         {
             var container = ConnectToContainer(id);
@@ -64,6 +55,13 @@ namespace StickerFire.Models
 
                 await blockBlob.UploadFromStreamAsync(fileStream);
             }
+        }
+        
+        public static string GetBlobUrl(string id, string title)
+        {
+            var container = ConnectToContainer(id);
+            var url = container.GetBlockBlobReference(title).StorageUri.PrimaryUri;
+            return url.ToString();
         }
     }
 }
