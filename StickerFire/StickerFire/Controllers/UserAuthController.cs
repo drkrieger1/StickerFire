@@ -57,7 +57,7 @@ namespace StickerFire.Controllers
 
 
         //Admin Registration form
-        //[Authorize(Policy = "Admin Only")]
+        [Authorize(Policy = "Admin Only")]
         [HttpGet]
         public IActionResult RegisterAdmin(string returnUrl = null)
         {
@@ -66,7 +66,7 @@ namespace StickerFire.Controllers
         }
 
         //Register Admin user
-        //[Authorize(Policy = "Admin Only")]
+        [Authorize(Policy = "Admin Only")]
         [HttpPost]
         public async Task<IActionResult> RegisterAdmin(MegaViewModel avm, string returnUrl = null)
         {
@@ -125,7 +125,7 @@ namespace StickerFire.Controllers
             }
             string error = "Unable to log you in.  Please try again or contact your system admin.";
             ModelState.AddModelError("", error);
-            return View();
+            return RedirectToAction("Index", "UserAuth");
         }
 
         [HttpPost]
