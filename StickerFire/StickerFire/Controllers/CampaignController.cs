@@ -217,7 +217,7 @@ namespace StickerFire.Controllers
 
             _Context.Campaign.Remove(campaign);
             await _Context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AdminIndex));
         }
 
     }
