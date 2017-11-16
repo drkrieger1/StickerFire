@@ -53,47 +53,38 @@
             @*Details Preview*@
             @{ 
                 foreach (var item in Model)
-                {<div class="container">
-                    @*<div class="row">
-                        <div class="col-xs-12 col-md-6">*@
-                            <div id="@Html.DisplayFor(modelItem => item.Title)" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            @if (item.ImgPath != null)
-                                            {
-                                                <a asp-controller="Campaign" asp-action="ViewCampaign" asp-route-id="@item.ID"><img class="Sticker" src="@item.ImgPath" /></a>
-                                            }
-                                            else
-                                            { <img class="Sticker" src="~/images/linkedIn.png" />}
-                                            
-                                            <ul class="Admin_Info">
-                                                <li>Title: @Html.DisplayFor(modelItem => item.Title)</li>
-                                                <li>Category: @Html.DisplayFor(modelItem => item.Category)</li>
-                                                <li>Votes: @Html.DisplayFor(modelItem => item.Votes)</li>
-                                                <li>Views: @Html.DisplayFor(modelItem => item.Views)</li>
-                                                <li>Active: @Html.DisplayFor(modelItem => item.Active)</li>
-                                                <li>Published: @Html.DisplayFor(modelItem => item.Published)</li>
-                                                <li>Description: @Html.DisplayFor(modelItem => item.Description)</li>
-                                                <li>Status: @Html.DisplayFor(modelItem => item.Status)</li>
-                                                <li>Deny Message: @Html.DisplayFor(modelItem => item.DenyMessage)</li>
-                                                <li>Img Path: @Html.DisplayFor(modelItem => item.ImgPath)</li>
-                                                <li>Owner ID: @Html.DisplayFor(modelItem => item.OwnerID)</li>
-                                                <li>Campain ID: @Html.DisplayFor(modelItem => item.ID)</li>
-                                            </ul>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
+                {
+                    <div id="@Html.DisplayFor(modelItem => item.Title)" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <img class="preview_Img" src="http://via.placeholder.com/450x300" />
+                                    <ul>
+                                        <li>Title: @Html.DisplayFor(modelItem => item.Title)</li>
+                                        <li>Category: @Html.DisplayFor(modelItem => item.Category)</li>
+                                        <li>Votes: @Html.DisplayFor(modelItem => item.Votes)</li>
+                                        <li>Views: @Html.DisplayFor(modelItem => item.Views)</li>
+                                        <li>Active: @Html.DisplayFor(modelItem => item.Active)</li>
+                                        <li>Published: @Html.DisplayFor(modelItem => item.Published)</li>
+                                        <li>Description: @Html.DisplayFor(modelItem => item.Description)</li>
+                                        <li>Status: @Html.DisplayFor(modelItem => item.Status)</li>
+                                        <li>Deny Message: @Html.DisplayFor(modelItem => item.DenyMessage)</li>
+                                        <li>Img Path: @Html.DisplayFor(modelItem => item.ImgPath)</li>
+                                        <li>Owner ID: @Html.DisplayFor(modelItem => item.OwnerID)</li>
+                                        <li>Campain ID: @Html.DisplayFor(modelItem => item.ID)</li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
-                         @*</div>
-                    </div>*@
-                </div>
+
+                        </div>
+
+                    </div>
                 }
             }
         </div>
