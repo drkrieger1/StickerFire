@@ -224,62 +224,70 @@ namespace StickerFireUnitTests
             Assert.Equal(testUser, "TestUser");
         }
 
+        [Fact]
+        public void RegisterLoginEmailsMatch()
+        {
+            RegisterViewModel register = new RegisterViewModel
+            {
+                Email = "test@email.com"
+            };
 
+            LoginViewModel login = new LoginViewModel
+            {
+                Email = "test@email.com"
+            };
 
+            Assert.Equal(register.Email, login.Email);
+        }
 
-        //[Fact]
-        //public void StickerFireDbContent()
-        //{
-        //    var options = new DbContextOptionsBuilder<StickerFireDbContext>()
-        //        .UseInMemoryDatabase(databaseName: "getStatusCode")
-        //        .Options;
+        [Fact]
+        public void RegisterLoginPasswordsMatch()
+        {
+            RegisterViewModel register = new RegisterViewModel
+            {
+                Password = "12345"
+            };
 
-        //    using (var context = new StickerFireDbContext(options))
-        //    {
-        //        var controller = new CampaignController(_userManager, context);
+            LoginViewModel login = new LoginViewModel
+            {
+                Password = "12345"
+            };
 
-        //        Campaign campaign = new Campaign();
-        //        campaign.ID = 1;
-        //        campaign.OwnerID = "1";
-        //        campaign.Title = "Awesome Sauce Campaign";
+            Assert.Equal(register.Password, login.Password);
+        }
 
-        //        var result = controller.Create(campaign);
+        [Fact]
+        public void HomeIndexResultView()
+        {
 
-        //        var find = context.Campaign.FirstOrDefaultAsync(t => t.ID == campaign.ID);
+            HomeController home = new HomeController();
 
-        //        int number = context.Campaign.Local.Count;
+            IActionResult result = home.Index();
 
-        //        Assert.Equal(1, number);
-        //    }
-        //}
+            Assert.IsType<ViewResult>(result);
+        }
 
-        //[Fact]
-        //public void StickerFireDbStatus()
-        //{
-        //    var options = new DbContextOptionsBuilder<StickerFireDbContext>()
-        //        .UseInMemoryDatabase(databaseName: "getStatusCode")
-        //        .Options;
+        [Fact]
+        public void HomeAboutResultView()
+        {
 
-        //    using (var context = new StickerFireDbContext(options))
-        //    {
-        //        var controller = new CampaignController(_userManager,context);
+            HomeController home = new HomeController();
 
-        //        Campaign campaign = new Campaign();
-        //        campaign.ID = 1;
-        //        campaign.OwnerID = "1";
-        //        campaign.Title = "Awesome Sauce Campaign";
+            IActionResult result = home.About();
 
-        //        var result = controller.Create(campaign);
+            Assert.IsType<ViewResult>(result);
+        }
 
-        //        CreatedAtActionResult Caar = (CreatedAtActionResult)result.Result;
+        [Fact]
+        public void FileUploadControlleTestUploadView()
+        {
+            var file = new FileUploadController();
 
-        //        Assert.StrictEqual(HttpStatusCode.Created, (HttpStatusCode)Caar.StatusCode.Value);
+            IActionResult result = file.TestUpload();
 
+            Assert.IsType<ViewResult>(result);
 
-        //    }
-        //}
-
-
+        }
 
     }
 }
