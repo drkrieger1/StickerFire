@@ -13,6 +13,10 @@ hr {
     color:black;
 }
 
+h2 {
+    font-family: 'Bauhaus 93';
+}
+
 h3 {
     font-family: 'Bauhaus 93';
 }
@@ -42,6 +46,8 @@ h3 {
 }
 
 .campList {
+    margin-top:2%;
+    margin-left:2%;
     margin-bottom: 2%;
     background-color: #e9eaec;
     border-radius: 10px;
@@ -78,6 +84,16 @@ h3 {
 
     .btn-lg:hover {
         background-color: #88c100;
+        text-decoration: none;
+        color:white;
+    }
+
+.campaignButton .btn-lg {
+    background-color: #88c100;
+}
+
+    .campaignButton .btn-lg:hover {
+        background-color: #58cbe5;
     }
 
 button {
@@ -104,6 +120,7 @@ button {
 
 .previewImg {
     margin-right: 5%;
+    margin-bottom:5%;
     float: left;
     height: 100px;
     filter: drop-shadow(2px 2px 0 white) drop-shadow(-2px 2px 0 white) drop-shadow(2px -2px 0 white) drop-shadow(-2px -2px 0 white) drop-shadow(1px 1px 2px black);

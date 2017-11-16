@@ -5,27 +5,28 @@
     Layout = "_Layout";
 }
 
-<h1>This is the Campaign index page</h1>
+<h3>Browse Campaigns</h3>
 
-<p>
-    <a asp-action="Create">Create new campaign </a>
-</p>
 <div class="container">
     <div class="row">
         @{
             foreach (var item in Model)
             {
-                <div class="col-xs-12 col-md-6 col-lg-6">
-                    @if (item.ImgPath != null)
+                if (item.Published == true)
+                {
+                    <div class="col-lg-3 campList">
+                        @if (item.ImgPath != null)
                     {
-                        <a asp-controller = "Campaign" asp-action = "ViewCampaign" asp-route-id = "@item.ID" ><img clas="Sticker" src="@item.ImgPath" /></a>
-                    }
-                    else
-                    { <img class="Sticker" src="~/images/linkedIn.png" />}
-                    <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
-                    <p>Votes:@Html.DisplayFor(modelItem => item.Votes) | Views:@Html.DisplayFor(modelItem => item.Views)</p>
-                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
-                </div>
+                            <a asp-controller="Campaign" asp-action="ViewCampaign" asp-route-id="@item.ID"><img src="@item.ImgPath" class="img-responsive previewImg" /></a>
+                        }
+                        else
+                        { <img src="https://stickerfireblob.blob.core.windows.net/f98ff485-0847-4d44-8bb1-f39bb0933f92container/scoop" />}
+                        <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+                        <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                        
+                        <p>Votes:@Html.DisplayFor(modelItem => item.Votes) | Views:@Html.DisplayFor(modelItem => item.Views)</p>
+                    </div>
+                }
 
             }
         }
