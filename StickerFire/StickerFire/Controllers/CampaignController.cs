@@ -185,7 +185,7 @@ namespace StickerFire.Controllers
             {
                 _Context.Update(campaign);
                 await _Context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AdminIndex));
             }
             return View(campaign);
         }
