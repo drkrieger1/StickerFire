@@ -63,7 +63,38 @@
                             }
                         </ul>
                     </li>
-                    <li>
+                    @{
+                        if (User.Identities.Any(u => u.IsAuthenticated))
+                        {
+                            <li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Manage
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-controller="Campaign" asp-action="MyCampaigns"><span class="glyphicon glyphicon-dashboard"></span> My Campaigns</a></li>
+                          
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <li>
+                                                <a asp-controller="User" asp-action="Index">
+                                                    <span class="glyphicon glyphicon-user">
+                                                    </span> Manage Users
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a asp-controller="Campaign" asp-action="AdminIndex">
+                                                    <span class="glyphicon glyphicon-user">
+                                                    </span> Manage Campaigns
+                                                </a>
+                                            </li>
+                                        }
+                                </ul>
+                            </li>
+
+                        }
+                    }
+                    @*<li>
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Manage
                             <span class="caret"></span>
@@ -87,7 +118,8 @@
                                 </li>
                             }
                         </ul>
-                    </li>
+                    </li>*@
+                    <li><a asp-controller="Campaign" asp-action="Index"><span class="glyphicon glyphicon-dashboard"></span> All Campaigns</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (!User.Identities.Any(u => u.IsAuthenticated))

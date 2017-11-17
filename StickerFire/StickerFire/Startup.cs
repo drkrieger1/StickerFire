@@ -58,16 +58,16 @@ namespace StickerFire
                    .AddEntityFrameworkStores<UserDbContext>()
                    .AddDefaultTokenProviders();            
             //Enabel OAuth for Google+
-            services.AddAuthentication().AddGoogle(googleOptions =>
-            {
-                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-            })
-            .AddFacebook(facebookOptions =>
-            {
-                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
-                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-            });
+            //services.AddAuthentication().AddGoogle(googleOptions =>
+            //{
+            //    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+            //    googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            //})
+            //.AddFacebook(facebookOptions =>
+            //{
+            //    facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+            //    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            //});
 
         }
 
@@ -84,6 +84,7 @@ namespace StickerFire
 
             app.Run(async (context) =>
             {
+                context.Response.Redirect("/Home/Index", false);
                 await context.Response.WriteAsync("You dun messed up");
             });
         }
