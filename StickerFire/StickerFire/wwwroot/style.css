@@ -159,7 +159,7 @@ button {
 }
 
 #footer{
-    position:page;
+    position:relative;
     margin-top: 40px;
     bottom: 0;
     width: 100%;
