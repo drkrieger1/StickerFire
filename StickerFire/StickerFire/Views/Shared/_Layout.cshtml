@@ -10,17 +10,17 @@
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/style.css" />
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <link rel="stylesheet" href="~/style.css" />
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/style.css" asp-append-version="true" />
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <link rel="stylesheet" href="~/style.css" asp-append-version="true" />
 
     </environment>
 
@@ -110,10 +110,10 @@
             </div>
         </div>
     </nav>
-    <div>
+    <section>
         @RenderBody()
-    </div>
-    <footer class=" col-sx-12 col-md-l col-lg-12 panel-footer" id="footer">
+    </section>
+    <footer class=" panel-footer" id="footer">
             <div class="footer">&copy; 2017 - StickerFire <a asp-controller="Home" asp-action="About">Meet the Devs</a></div>
     </footer>
 </body>
