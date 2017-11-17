@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace StickerFire.Models
 {
+    //Not yet Implemented: TODO
     public class ExternalLoginModel
     {
             [Required]

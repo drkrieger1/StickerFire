@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace StickerFire.Models
 {
+    //Model for the login portion of the login/register view
     public class LoginViewModel
     {
         [Required]

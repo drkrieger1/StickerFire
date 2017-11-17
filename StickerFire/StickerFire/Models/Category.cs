@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace StickerFire.Models
 {
+    //Sticker Categories
     public enum Category
     {
-        Animals, Cars, Flags, Flowers, Funny, Graffiti, Holidays, Lables, Love, Mashup, Patriotic, Programing, Rastafari, Religious, Satire, SkateBoarding, Tattoos, Text, Trendy
+        Animals, Cars, Flags, Flowers, Food, Funny, Graffiti, Holidays, Lables, Love, Mashup, Patriotic, Programing, Rastafari, Religious, Satire, SkateBoarding, Sports, Tattoos, Text, Trendy
     }
 }

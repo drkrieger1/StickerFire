@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace StickerFire.Models
 {
+    //Enables Blob storage with Azure
     public static class Blob
     {
         public static CloudBlobContainer ConnectToContainer(string id) //This is to DRY up connecting to the user container

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace StickerFire.Data
 {
+    //Context for campaign models
     public class StickerFireDbContext : DbContext
     {
         public StickerFireDbContext(DbContextOptions<StickerFireDbContext>Options): base(Options)
