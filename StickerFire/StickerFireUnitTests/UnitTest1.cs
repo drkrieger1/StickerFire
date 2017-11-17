@@ -21,6 +21,8 @@ namespace StickerFireUnitTests
         private readonly ILogger<UserAuthController> logger;
         private MegaViewModel rvm;
         private MegaViewModel lvm;
+        
+
 
         [Fact]
         public void UserNameIsValid()
@@ -248,6 +250,53 @@ namespace StickerFireUnitTests
             Assert.Equal(register.Email, login.Email);
         }
 
+        
+
+        [Fact]
+        public void MegaViewModelLoginPassword()
+        {
+            MegaViewModel mega = new MegaViewModel
+            {
+                LoginViewModel = new LoginViewModel
+                {
+                    Password = "12345"
+                }
+            };
+            string result = mega.LoginViewModel.Password;
+
+            Assert.Equal(result, mega.LoginViewModel.Password);
+        }
+
+        [Fact]
+        public void MegaViewModelLoginRememberMe()
+        {
+            MegaViewModel mega = new MegaViewModel
+            {
+                LoginViewModel = new LoginViewModel
+                {
+                    RememberMe = true
+                }
+            };
+            bool result = mega.LoginViewModel.RememberMe;
+
+            Assert.Equal(result, mega.LoginViewModel.RememberMe);
+        }
+
+        [Fact]
+        public void MegaViewModelLoginEmail()
+        {
+            MegaViewModel mega = new MegaViewModel
+            {
+                LoginViewModel = new LoginViewModel
+                {
+                    Email = "testc@email.com"
+                }
+            };
+            string result = mega.LoginViewModel.Email;
+
+            Assert.Equal(result, mega.LoginViewModel.Email);
+        }
+
         [Fact]
         public void RegisterLoginPasswordsMatch()
         {
@@ -262,6 +311,73 @@ namespace StickerFireUnitTests
             };
 
             Assert.Equal(register.Password, login.Password);
+        }
+
+        [Fact]
+        public void MegaViewModelRegisterEmail()
+        {
+            MegaViewModel mega = new MegaViewModel
+            {
+                RegisterViewModel = new RegisterViewModel
+                {
+                    Email = "testc@email.com"
+                }
+            };
+            string result = mega.RegisterViewModel.Email;
+
+            Assert.Equal(result, mega.RegisterViewModel.Email);
+        }
+        [Fact]
+        public void MegaViewModelRegisterPassword()
+        {
+            MegaViewModel mega = new MegaViewModel
+            {
+                RegisterViewModel = new RegisterViewModel
+                {
+                    Password = "12345"
+                }
+            };
+            string result = mega.RegisterViewModel.Password;
+
+            Assert.Equal(result, mega.RegisterViewModel.Password);
+        }
+
+        [Fact]
+        public void MegaViewModelRegisterLoginPasswordsMatch()
+        {
+            MegaViewModel mega = new MegaViewModel
+            {
+                RegisterViewModel = new RegisterViewModel
+                {
+                    Password = "12345"
+                }
+            };
+            MegaViewModel mega2 = new MegaViewModel
+            {
+                LoginViewModel = new LoginViewModel
+                {
+                    Password = "12345"
+                }
+            };
+            string result = mega.RegisterViewModel.Password;
+            string result2 = mega2.LoginViewModel.Password;
+
+            Assert.Equal(result, result2);
+        }
+
+        [Fact]
+        public void MegaViewModelRegisterConfirmPassword()
+        {
+            MegaViewModel mega = new MegaViewModel
+            {
+                RegisterViewModel = new RegisterViewModel
+                {
+                    ConfirmPassword = "12345"
+                }
+            };
+            string result = mega.RegisterViewModel.ConfirmPassword;
+
+            Assert.Equal(result, mega.RegisterViewModel.ConfirmPassword);
         }
 
         [Fact]
@@ -322,6 +438,7 @@ namespace StickerFireUnitTests
 
             }
         }
+        
 
         [Fact]
         public void UserAuthAdminRegisterViewResult()
@@ -332,6 +449,8 @@ namespace StickerFireUnitTests
 
             Assert.IsType<ViewResult>(result);
         }
+
+        
 
     }
 }
