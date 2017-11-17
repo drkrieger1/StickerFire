@@ -8,10 +8,13 @@ namespace StickerFire.Controllers
 {
     public class HomeController : Controller
     {
+        //Return home view
         public IActionResult Index()
         {
             return View();
         }
+
+        //Return About us page
         public IActionResult About()
         {
             return View();

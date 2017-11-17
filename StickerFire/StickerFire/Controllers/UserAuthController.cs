@@ -20,12 +20,15 @@ namespace StickerFire.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger _logger;
 
+
+        //Constuctor with dependancies
         public UserAuthController(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signInManager, ILogger<UserAuthController> logger)
         {
             _userManager = usermanager;
             _signInManager = signInManager;
             _logger = logger;
         }
+
 
         //Regular user signup/registration page
         [HttpGet]
@@ -34,6 +37,7 @@ namespace StickerFire.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
+
 
         //Register regular user
         [HttpPost]
@@ -54,6 +58,7 @@ namespace StickerFire.Controllers
             return RedirectToAction("Index", "UserAuth");
         }
 
+
         //External Registration -- OAuth
         public IActionResult ExternalLogin(string provider, string returnURL = null)
         {
@@ -61,6 +66,9 @@ namespace StickerFire.Controllers
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectURL);
             return Challenge(properties, provider);
         }
+
+
+        //Unused OAUTH Action: TODO
         public async Task<IActionResult> ExternalLoginCallback(string returnURL = null, string remoteError = null)
         {
             if (remoteError != null)
@@ -92,6 +100,7 @@ namespace StickerFire.Controllers
             }
         }
 
+
         //Admin Registration form
         [Authorize(Policy = "Admin Only")]
         [HttpGet]
@@ -112,7 +121,8 @@ namespace StickerFire.Controllers
             {
                 var user = new ApplicationUser { UserName = avm.RegisterViewModel.Email, Email = avm.RegisterViewModel.Email };
                 var result = await _userManager.CreateAsync(user, avm.RegisterViewModel.Password);
-
+                
+                //If user is created correctly, assign them and admin role
                 if (result.Succeeded)
                 {
                     List<Claim> memberClaims = new List<Claim>();
@@ -122,6 +132,7 @@ namespace StickerFire.Controllers
 
                     var addClaims = await _userManager.AddClaimsAsync(user, memberClaims);
 
+                    //Sign in the new administrator
                     if (addClaims.Succeeded)
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
@@ -132,6 +143,7 @@ namespace StickerFire.Controllers
             }
             return View();
         }
+
 
         //Login User
         [HttpPost]
@@ -165,6 +177,8 @@ namespace StickerFire.Controllers
             return RedirectToAction("Index", "UserAuth");
         }
 
+
+        //Logout the User
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
@@ -173,7 +187,6 @@ namespace StickerFire.Controllers
             _logger.LogInformation("User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
-
 
     }
 }

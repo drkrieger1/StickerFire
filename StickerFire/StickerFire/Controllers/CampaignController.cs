@@ -75,7 +75,8 @@ namespace StickerFire.Controllers
             //Get current user
             string userEmail = HttpContext.User.Identity.Name;
             ApplicationUser user = await _user.FindByEmailAsync(userEmail);
-
+           
+            //Get users campaigns
             var myCampaigns = await _Context.Campaign.Where(c => c.OwnerID == user.Id).ToListAsync();
 
             return View(myCampaigns);
@@ -84,13 +85,20 @@ namespace StickerFire.Controllers
         //View single campaign
         public async Task<IActionResult> ViewCampaign(int id)
         {
+            //Get campaign by ID
             Campaign myCampaigns = await _Context.Campaign.FirstOrDefaultAsync(c => c.ID == id);
+
+            //Increment the campaigns views
             myCampaigns.Views++;
+
+            //Save the change with the edit action
             await Edit(myCampaigns.ID, myCampaigns);
 
+            //Return the selected campaign to the view
             return View(myCampaigns);
         }
 
+        //Increments the vote counter on the selected campaign.  Works similarly to the view incrementer.
         public async Task<IActionResult> Vote(int id)
         {
             Campaign myCampaigns = await _Context.Campaign.FirstOrDefaultAsync(c => c.ID == id);
@@ -109,29 +117,35 @@ namespace StickerFire.Controllers
             // full path to file in temp location
             var filePath = Path.GetTempFileName();
 
+            //Creates a stream that saves file to temporary location for async upload to Azure
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }   
-
+            //returns the temporary file location
             return filePath;
         }
 
-        //Get the create View
+        //Get the create form View
         public IActionResult Create()
         {
             return View();
         }
+
         //Post method to bind the entered campaign information into the database with AntiForgery Token
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,OwnerID,Votes,Views,Title,ImgPath,Description,DenyMessage,Published,Active,Category,Status")]Campaign campaign, IFormFile file)
         {
+            //Get temporary file from the PostFile action
             var path = await PostFile(file);
             //Get current user
             string userEmail = HttpContext.User.Identity.Name;
+
+            //get the current user
             ApplicationUser user = await _user.FindByEmailAsync(userEmail);
 
+            //Check the information from the form for validity
             if (ModelState.IsValid)
             {
                 //Save defaults to campaign properties
@@ -143,9 +157,8 @@ namespace StickerFire.Controllers
                 await Blob.MakeAContainer(user.Id);
                 await Blob.UploadBlob(user.Id, title, path);
 
+                //Save final image path to the campaign model.
                 campaign.ImgPath = Blob.GetBlobUrl(user.Id, campaign.Title);
-
-                //TODO: Overwrite ImgPath with URL on azure
 
                 //Save new campaign to DB
                 _Context.Add(campaign);
@@ -153,10 +166,7 @@ namespace StickerFire.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            //return View(campaign);
             return View();
-
-
         }
 
 
@@ -169,6 +179,7 @@ namespace StickerFire.Controllers
                 return NotFound();
             }
 
+            //Get selected campaign
             var campaign = await _Context.Campaign
                 .SingleOrDefaultAsync(c => c.ID == id);
 
@@ -176,6 +187,7 @@ namespace StickerFire.Controllers
             {
                 return NotFound();
             }
+
             return View(campaign);
         }
 
