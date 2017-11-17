@@ -85,6 +85,7 @@ namespace StickerFire
 
             app.Run(async (context) =>
             {
+                context.Response.Redirect("/Home/Index", false);
                 await context.Response.WriteAsync("You dun messed up");
             });
         }

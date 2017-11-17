@@ -8,6 +8,6 @@ namespace StickerFire.Models
     //Status of campaign submissions.  Defaults to pending.
     public enum Status
     {
-        Pending, Aproved, Denied 
+        Pending, Approved, Denied 
     }
 }

@@ -44,7 +44,7 @@
                         <form asp-controller="Campaign" asp-action="Index" class="navbar-form navbar-left">
                             <div class="form-group">
                                 <input type="text" name="searchString" class="form-control" placeholder="Search">              
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <button type="submit" class="btn btn-default">Search</button>
                             </div>
                         </form>
                     </li>
@@ -63,7 +63,39 @@
                             }
                         </ul>
                     </li>
-                    <li>
+                    @{
+                        if (User.Identities.Any(u => u.IsAuthenticated))
+                        {
+                            <li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Manage
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-controller="Campaign" asp-action="MyCampaigns"><span class="glyphicon glyphicon-dashboard"></span> My Campaigns</a></li>
+
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li>
+                                            <a asp-controller="User" asp-action="Index">
+                                                <span class="glyphicon glyphicon-user">
+                                                </span> Manage Users
+                                            </a>
+                                        </li>
+                                            <li>
+                                                <a asp-controller="Campaign" asp-action="AdminIndex">
+                                                    <span class="glyphicon glyphicon-user">
+                                                    </span> Manage Campaigns
+                                                </a>
+                                            </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    }
+                    <li><a asp-controller="Campaign" asp-action="Index"><span class="glyphicon glyphicon-dashboard"></span> All Campaigns</a></li>
+               </ul>
+                    @*<li>
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Manage
                             <span class="caret"></span>
@@ -88,7 +120,7 @@
                             }
                         </ul>
                     </li>
-                </ul>
+                </ul>*@
                 <ul class="nav navbar-nav navbar-right">
                     @if (!User.Identities.Any(u => u.IsAuthenticated))
                     {
