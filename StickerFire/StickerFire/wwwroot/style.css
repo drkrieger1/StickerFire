@@ -47,16 +47,26 @@ h3 {
 
 .campList {
     margin-top:2%;
-    margin-left:2%;
-    margin-bottom: 2%;
+    margin-bottom: 20px;
     background-color: #e9eaec;
-    border-radius: 10px;
+    filter: drop-shadow(1px 1px 1px black);
+
+}
+
+.paneList {
+    margin-top: 2%;
+    margin-bottom: 20px;
     filter: drop-shadow(1px 1px 1px black);
 }
+
+.panel {
+    background-color: #e9eaec;
+    }
 
 .stickerInfo {
     margin-top: 5%;
 }
+
 
 
 .progress {
@@ -110,8 +120,17 @@ button {
     button:hover {
         background-color: #88c100;
     }
+
+    #vote {
+        margin-bottom:90px;
+        margin-top:5px;
+        position:relative;
+        display:inline-block;
+
+    }
     
     .Sticker {
+        border-radius: 5px;
         filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white)drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white) drop-shadow(1px 1px 3px black);
         margin-bottom: 2%;
         display: inline-block;
@@ -134,7 +153,18 @@ button {
     height: 40px;
 }
 
+.container {
+    clear:both;
+    margin-bottom: 60px;
+}
+
 #footer{
-    position:fixed;
+    position:page;
+    margin-top: 40px;
     bottom: 0;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    background-color:#222222;
+    color: dimgrey;
 }

@@ -14,17 +14,19 @@
             {
                 if (item.Published == true)
                 {
-                    <div class="col-lg-3 campList">
-                        @if (item.ImgPath != null)
+                    <div class="col-lg-6 paneList">
+                        <div class="panel">
+                            @if (item.ImgPath != null)
                     {
-                            <a asp-controller="Campaign" asp-action="ViewCampaign" asp-route-id="@item.ID"><img src="@item.ImgPath" class="img-responsive previewImg" /></a>
-                        }
-                        else
-                        { <img src="https://stickerfireblob.blob.core.windows.net/f98ff485-0847-4d44-8bb1-f39bb0933f92container/scoop" />}
-                        <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
-                        <p>@Html.DisplayFor(modelItem => item.Description)</p>
-                        
-                        <p>Votes:@Html.DisplayFor(modelItem => item.Votes) | Views:@Html.DisplayFor(modelItem => item.Views)</p>
+                                <a asp-controller="Campaign" asp-action="ViewCampaign" asp-route-id="@item.ID"><img src="@item.ImgPath" class="img-responsive previewImg" /></a>
+                            }
+                            else
+                            { <img src="https://stickerfireblob.blob.core.windows.net/f98ff485-0847-4d44-8bb1-f39bb0933f92container/scoop" />}
+                            <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+                            <p>@Html.DisplayFor(modelItem => item.Description)</p>
+
+                            <p>Votes:@Html.DisplayFor(modelItem => item.Votes) | Views:@Html.DisplayFor(modelItem => item.Views)</p>
+                        </div>
                     </div>
                 }
 
