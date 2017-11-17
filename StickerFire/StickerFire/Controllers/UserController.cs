@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace StickerFire.Controllers
 {
+    //User controls ADMIN ONLY
    [Authorize(Policy = "Admin Only")]
     public class UserController : Controller
     {
@@ -26,7 +27,7 @@ namespace StickerFire.Controllers
             return View(await _context.ApplicationUser.ToListAsync());
         }
 
-        // GET: User/Details/5
+        // GET: User/Details
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -44,7 +45,7 @@ namespace StickerFire.Controllers
             return View(theUsers);
         }
 
-        // GET: User/Edit/5
+        // GET: User/Edit admi view.
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -60,9 +61,7 @@ namespace StickerFire.Controllers
             return View(theUsers);
         }
 
-        // POST: User/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: User/Edit to database
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] ApplicationUser theUsers)
@@ -95,7 +94,7 @@ namespace StickerFire.Controllers
             return View(theUsers);
         }
 
-        // GET: User/Delete/5
+        // GET: User/Delete/ user admin view
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -116,7 +115,7 @@ namespace StickerFire.Controllers
 
         }
 
-        // POST: User/Delete/5
+        // POST: User/Delete action
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)

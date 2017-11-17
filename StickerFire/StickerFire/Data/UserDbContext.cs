@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace StickerFire.Data
 {
+    //Context for Identity tables (ApplicationUser)
     public class UserDbContext : IdentityDbContext<ApplicationUser>
     {
         public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)

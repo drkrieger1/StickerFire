@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace StickerFire.Models
 {
+    //Primary application model. Defines individual sticker campaigns.
     public class Campaign
-
     {
+        //Unique Id
         public int ID { get; set; }
 
         public string OwnerID { get; set; }
@@ -19,23 +20,24 @@ namespace StickerFire.Models
         [Range(0, Int32.MaxValue)]
         public int Views { get; set; }
 
-        //[Required]
+        [Required]
         public string Title { get; set; }
 
         public string ImgPath { get; set; }
 
-        //[Required]
-        //[StringLength(400)]
+        [Required]
         public string Description { get; set; }
+
         public string DenyMessage { get; set; }
 
         public bool Published { get; set; }
+
         public bool Active { get; set; }
 
-
         public Category Category { get; set; }
+
         public Status Status { get; set; }
-        //Votes Voters 
+
         public DateTime Expiration { get; set; }       
     }
 }

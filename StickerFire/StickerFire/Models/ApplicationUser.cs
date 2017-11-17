@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace StickerFire.Models
 {
+    //Application user.  No Custom properties.
     public class ApplicationUser : IdentityUser
     {
     }
