@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
+
 namespace StickerFireUnitTests
 {
     public class Tests
@@ -22,7 +23,6 @@ namespace StickerFireUnitTests
         private MegaViewModel rvm;
         private MegaViewModel lvm;
         
-
 
         [Fact]
         public void UserNameIsValid()
@@ -37,6 +37,23 @@ namespace StickerFireUnitTests
 
             //Assert
             Assert.Equal(testMail, "test@mail.com");
+        }
+
+
+
+        [Fact]
+        public void UserNameIsString()
+        {
+            //Arrange
+            RegisterViewModel register = new RegisterViewModel
+            {
+                Email = "test@mail.com",
+            };
+            //Act
+            string testMail = register.Email;
+
+            //Assert
+            Assert.IsType<string>(testMail);
         }
 
         [Theory]
@@ -68,6 +85,34 @@ namespace StickerFireUnitTests
         }
 
         [Fact]
+        public void DatetimeSet()
+        {
+            Campaign campaign = new Campaign
+            {
+                Expiration = new DateTime(2017, 11, 17)
+
+
+            };
+            DateTime date = campaign.Expiration;
+
+            Assert.Equal(date, new DateTime(2017, 11, 17));
+        }
+
+        [Fact]
+        public void DatetimeIsDateTime()
+        {
+            Campaign campaign = new Campaign
+            {
+                Expiration = new DateTime(2017, 11, 17)
+
+
+            };
+            DateTime date = campaign.Expiration;
+
+            Assert.IsType<DateTime>(date);
+        }
+
+        [Fact]
         public void LoginEmailIsValid()
         {
             //Arrange
@@ -80,6 +125,43 @@ namespace StickerFireUnitTests
 
             //Assert
             Assert.Equal(testMail, "test@mail.com");
+        }
+        [Fact]
+        public void LoginEmailIsString()
+        {
+            //Arrange
+            LoginViewModel register = new LoginViewModel
+            {
+                Email = "test@mail.com",
+            };
+            //Act
+            string testMail = register.Email;
+
+            //Assert
+            Assert.IsType<string>(testMail);
+        }
+        [Fact]
+        public void ExternalLoginModel()
+        {
+            ExternalLoginModel external = new ExternalLoginModel
+            {
+                Email = "test@email.com"
+            };
+            var test = external.Email;
+
+            Assert.Equal(test, "test@email.com");
+        }
+
+        [Fact]
+        public void ExternalLoginModelIsString()
+        {
+            ExternalLoginModel external = new ExternalLoginModel
+            {
+                Email = "test@email.com"
+            };
+            var test = external.Email;
+
+            Assert.IsType<string>(test);
         }
 
         [Fact]
@@ -98,6 +180,21 @@ namespace StickerFireUnitTests
         }
 
         [Fact]
+        public void CampaignTitleIsString()
+        {
+            //Arrange
+            Campaign campaign = new Campaign
+            {
+                Title = "Test Campaign Title",
+            };
+            //Act
+            string testTitle = campaign.Title;
+
+            //Assert
+            Assert.IsType<string>(testTitle);
+        }
+
+        [Fact]
         public void CampaignImgPath()
         {
             //Arrange
@@ -110,6 +207,20 @@ namespace StickerFireUnitTests
 
             //Assert
             Assert.Equal(testImgPath, "img/test/path/");
+        }
+        [Fact]
+        public void CampaignImgPathIsString()
+        {
+            //Arrange
+            Campaign campaign = new Campaign
+            {
+                ImgPath = "img/test/path/",
+            };
+            //Act
+            string testImgPath = campaign.ImgPath;
+
+            //Assert
+            Assert.IsType<string>(testImgPath);
         }
 
         [Fact]
@@ -127,6 +238,21 @@ namespace StickerFireUnitTests
             Assert.Equal(testDeny, "Test Deny Message");
         }
 
+        [Fact]
+        public void CampaignDenyMessageIsString()
+        {
+            //Arrange
+            Campaign campaign = new Campaign
+            {
+                DenyMessage = "Test Deny Message",
+            };
+            //Act
+            string testDeny = campaign.DenyMessage;
+
+            //Assert
+            Assert.IsType<string>(testDeny);
+        }
+
 
         [Fact]
         public void CampaignPublished()
@@ -142,6 +268,21 @@ namespace StickerFireUnitTests
             //Assert
             Assert.Equal(testPublish, true);
         }
+        [Fact]
+        public void CampaignPublishedIsBool()
+        {
+            //Arrange
+            Campaign campaign = new Campaign
+            {
+                Published = true,
+            };
+            //Act
+            bool testPublish = campaign.Published;
+
+            //Assert
+            Assert.IsType<bool>(testPublish);
+        }
+
 
         [Fact]
         public void CampaignIsActive()
@@ -156,6 +297,21 @@ namespace StickerFireUnitTests
 
             //Assert
             Assert.Equal(testActive, true);
+        }
+
+        [Fact]
+        public void CampaignIsActiveTypeBool()
+        {
+            //Arrange
+            Campaign campaign = new Campaign
+            {
+                Active = true,
+            };
+            //Act
+            bool testActive = campaign.Active;
+
+            //Assert
+            Assert.IsType<bool>(testActive);
         }
 
 
@@ -175,6 +331,21 @@ namespace StickerFireUnitTests
         }
 
         [Fact]
+        public void CampaignDescriptionIsString()
+        {
+            //Arrange
+            Campaign campaign = new Campaign
+            {
+                Description = "Test Description",
+            };
+            //Act
+            string testDescription = campaign.Description;
+
+            //Assert
+            Assert.IsType<string>(testDescription);
+        }
+
+        [Fact]
         public void CampaignVotes()
         {
             //Arrange
@@ -187,6 +358,20 @@ namespace StickerFireUnitTests
 
             //Assert
             Assert.Equal(testVotes, 25);
+        }
+        [Fact]
+        public void CampaignVotesIsInt()
+        {
+            //Arrange
+            Campaign campaign = new Campaign
+            {
+                Votes = 25,
+            };
+            //Act
+            int testVotes = campaign.Votes;
+
+            //Assert
+            Assert.IsType<int>(testVotes);
         }
 
         [Fact]
@@ -203,6 +388,20 @@ namespace StickerFireUnitTests
             //Assert
             Assert.Equal(testVotes, 25);
         }
+        [Fact]
+        public void CampaignViewsIsInt()
+        {
+            //Arrange
+            Campaign campaign = new Campaign
+            {
+                Views = 25,
+            };
+            //Act
+            int testVotes = campaign.Views;
+
+            //Assert
+            Assert.IsType<int>(testVotes);
+        }
 
         [Fact]
         public void CampaignOwnderId()
@@ -218,6 +417,20 @@ namespace StickerFireUnitTests
             //Assert
             Assert.Equal(testOwnerId, "1");
         }
+        [Fact]
+        public void CampaignOwnderIdIsString()
+        {
+            //Arrange
+            Campaign campaign = new Campaign
+            {
+                OwnerID = "1",
+            };
+            //Act
+            string testOwnerId = campaign.OwnerID;
+
+            //Assert
+            Assert.IsType<string>(testOwnerId);
+        }
 
         [Fact]
         public void UserHasName()
@@ -232,6 +445,20 @@ namespace StickerFireUnitTests
 
             //Assert
             Assert.Equal(testUser, "TestUser");
+        }
+        [Fact]
+        public void UserHasNameIsString()
+        {
+            //Arrange
+            ApplicationUser user = new ApplicationUser
+            {
+                UserName = "TestUser",
+            };
+            //Act
+            string testUser = user.UserName;
+
+            //Assert
+            Assert.IsType<string>(testUser);
         }
 
         [Fact]
@@ -267,6 +494,22 @@ namespace StickerFireUnitTests
             Assert.Equal(result, mega.LoginViewModel.Password);
         }
 
+
+        [Fact]
+        public void MegaViewModelLoginPasswordIsString()
+        {
+            MegaViewModel mega = new MegaViewModel
+            {
+                LoginViewModel = new LoginViewModel
+                {
+                    Password = "12345"
+                }
+            };
+            string result = mega.LoginViewModel.Password;
+
+            Assert.IsType<string>(result);
+        }
+
         [Fact]
         public void MegaViewModelLoginRememberMe()
         {
@@ -280,6 +523,20 @@ namespace StickerFireUnitTests
             bool result = mega.LoginViewModel.RememberMe;
 
             Assert.Equal(result, mega.LoginViewModel.RememberMe);
+        }
+        [Fact]
+        public void MegaViewModelLoginRememberMeIsBool()
+        {
+            MegaViewModel mega = new MegaViewModel
+            {
+                LoginViewModel = new LoginViewModel
+                {
+                    RememberMe = true
+                }
+            };
+            bool result = mega.LoginViewModel.RememberMe;
+
+            Assert.IsType<bool>(result);
         }
 
         [Fact]
@@ -295,6 +552,21 @@ namespace StickerFireUnitTests
             string result = mega.LoginViewModel.Email;
 
             Assert.Equal(result, mega.LoginViewModel.Email);
+        }
+
+        [Fact]
+        public void MegaViewModelLoginEmailIsString()
+        {
+            MegaViewModel mega = new MegaViewModel
+            {
+                LoginViewModel = new LoginViewModel
+                {
+                    Email = "testc@email.com"
+                }
+            };
+            string result = mega.LoginViewModel.Email;
+
+            Assert.IsType<string>(result);
         }
 
         [Fact]
@@ -328,6 +600,20 @@ namespace StickerFireUnitTests
             Assert.Equal(result, mega.RegisterViewModel.Email);
         }
         [Fact]
+        public void MegaViewModelRegisterEmailIsString()
+        {
+            MegaViewModel mega = new MegaViewModel
+            {
+                RegisterViewModel = new RegisterViewModel
+                {
+                    Email = "testc@email.com"
+                }
+            };
+            string result = mega.RegisterViewModel.Email;
+
+            Assert.IsType<string>(result);
+        }
+        [Fact]
         public void MegaViewModelRegisterPassword()
         {
             MegaViewModel mega = new MegaViewModel
@@ -340,6 +626,21 @@ namespace StickerFireUnitTests
             string result = mega.RegisterViewModel.Password;
 
             Assert.Equal(result, mega.RegisterViewModel.Password);
+        }
+
+        [Fact]
+        public void MegaViewModelRegisterPasswordIsString()
+        {
+            MegaViewModel mega = new MegaViewModel
+            {
+                RegisterViewModel = new RegisterViewModel
+                {
+                    Password = "12345"
+                }
+            };
+            string result = mega.RegisterViewModel.Password;
+
+            Assert.IsType<string>(result);
         }
 
         [Fact]
@@ -379,6 +680,20 @@ namespace StickerFireUnitTests
 
             Assert.Equal(result, mega.RegisterViewModel.ConfirmPassword);
         }
+        [Fact]
+        public void MegaViewModelRegisterConfirmPasswordIsString()
+        {
+            MegaViewModel mega = new MegaViewModel
+            {
+                RegisterViewModel = new RegisterViewModel
+                {
+                    ConfirmPassword = "12345"
+                }
+            };
+            string result = mega.RegisterViewModel.ConfirmPassword;
+
+            Assert.IsType<string>(result);
+        }
 
         [Fact]
         public void HomeIndexResultView()
@@ -402,16 +717,6 @@ namespace StickerFireUnitTests
             Assert.IsType<ViewResult>(result);
         }
 
-        [Fact]
-        public void FileUploadControllerTestUploadView()
-        {
-            var file = new FileUploadController();
-
-            IActionResult result = file.TestUpload();
-
-            Assert.IsType<ViewResult>(result);
-
-        }
 
         [Fact]
         public void CampaignDbContextEqualId()
